@@ -15,7 +15,8 @@ export default defineConfig({
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
     { name: "mobile-320", use: { ...devices["Desktop Chrome"], viewport: { width: 320, height: 720 } } },
   ],
-  webServer: {
+  // Pointed at a deployed URL, test it directly instead of starting a local server.
+  webServer: process.env.E2E_BASE_URL ? undefined : {
     command: "npm run build && npm run start -- -p 3100",
     url: "http://localhost:3100/api/v1/health/live",
     reuseExistingServer: true,

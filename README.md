@@ -4,7 +4,9 @@ Small Edinburgh communities pool interest and attendance to reserve a venue-appr
 
 ## Current status
 
-Hackathon build in progress. What exists and is covered by automated tests:
+Hackathon build in progress. **Live judge sandbox: https://shared-cultural-bookings.vercel.app** (Vercel, Mumbai region, with Supabase in ap-south-1). Everything in it is fictional and synthetic.
+
+What exists and is covered by automated tests:
 
 | Area | What is implemented |
 | --- | --- |
@@ -21,7 +23,7 @@ Acceptance-test coverage for T01 to T23 is tracked honestly in `specs/test_statu
 
 - **No live Qloo call has been made.** The adapter and live-mode runs are tested against hand-written responses only; the `/search` envelope and affinity field are unverified (RISK11). The sandbox always uses synthetic evidence because its programmes and groups are fictional.
 - Pilot (non-sandbox) sign-in with Supabase Auth, venue catalogue editing and operator tools beyond the audit view are not built. Only the signed sandbox capability is accepted by the API.
-- Not deployed. No real venue, organiser, booking or payment is involved.
+- No real venue, organiser, booking or payment is involved.
 - No LLM is used; explanations are deterministic templates (DEC19).
 
 ## Development
@@ -68,11 +70,11 @@ tests/                unit, db, e2e and perf suites
 
 The browser never receives database or provider credentials. Route handlers and server actions take the actor from the verified session only and call guarded database functions, which independently check membership, object version, deadline and capacity in one transaction.
 
-## Deployment (not yet performed)
+## Deployment
 
 1. Create a Supabase project, then `npx supabase link --project-ref <ref>` and `npx supabase db push`.
 2. In the SQL editor create the application login with a generated secret: `create role scb_app_login login password '<secret>' in role scb_app;`
-3. Import the repository into Vercel and set server-side environment variables: `DATABASE_URL` (the pooler connection string for `scb_app_login`), `DEMO_CAPABILITY_SECRET`, `WORKER_TRIGGER_SECRET` or `CRON_SECRET`, `APP_BASE_URL` and, once issued, `QLOO_API_KEY`.
+3. Import the repository into Vercel and set server-side environment variables: `DATABASE_URL` (the IPv4 session-pooler connection string for `scb_app_login`, user `scb_app_login.<project-ref>`; the direct database host is IPv6-only), `DEMO_CAPABILITY_SECRET`, `WORKER_TRIGGER_SECRET` or `CRON_SECRET`, `APP_BASE_URL` and, once issued, `QLOO_API_KEY`.
 4. pg_cron (enabled by the migrations) expires proposals and purges sandboxes inside the database. `/api/v1/internal/tick` recovers match runs whose worker lease lapsed; schedule it with Vercel Cron or an external scheduler using the bearer secret.
 5. Run a private, redacted live Qloo contract test before describing any result as Qloo-powered.
 
