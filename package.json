@@ -19,7 +19,8 @@
     "db:reset": "supabase db reset",
     "test:e2e": "playwright test",
     "perf": "vitest run --config vitest.perf.config.ts",
-    "check:bundle": "node scripts/check-client-bundle.mjs"
+    "check:bundle": "node scripts/check-client-bundle.mjs",
+    "test:live": "vitest run --config vitest.live.config.ts --silent=false"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
