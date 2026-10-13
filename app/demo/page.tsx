@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Flash, ProgressMeter, StateBadge, SubmitButton } from "@/components/ui";
+import { Updates } from "@/components/updates";
 import { requireDemoSession } from "@/lib/auth/demo-session";
 import { callApi } from "@/lib/db/api";
 import type { Overview, ProposalSummary } from "@/lib/demo/views";
@@ -35,6 +36,7 @@ export default async function DemoDashboard({
     <main id="main" className="page stack-lg">
       <Flash notice={notice} error={error} />
       <GuidedSteps />
+      <Updates actorId={session.actorId} workspaceId={session.workspaceId} />
 
       {o.organised_groups.map((g) => (
         <section key={g.id} className="stack" aria-labelledby={`g-${g.id}`}>

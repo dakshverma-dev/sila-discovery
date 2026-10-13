@@ -96,3 +96,42 @@ describe("account deletion (R16, D20)", () => {
     expect(rows.every((r) => r.declared_meaning === null)).toBe(true);
   });
 });
+
+describe("consent tracking from brief choices (T16)", () => {
+  it("records external-query and sharing consent changes as separate events", async () => {
+    const { rows: b } = await admin.query(
+      "select * from scb.group_briefs where group_id = $1 order by version desc limit 1", [demo.groups.film_society]);
+    const brief = b[0];
+    const { json } = await import("@/lib/db/api");
+    const before = await admin.query("select count(*)::int as n from scb.consents where user_id = $1", [demo.users.org_film]);
+    await ok(api("save_group_brief", demo.users.org_film, demo.groups.film_society, brief.budget_pence,
+      brief.expected_seats, json(brief.availability), "ASK_FIRST", false, brief.access_requirements, json([]), randomUUID()));
+    const { rows } = await admin.query(
+      `select purpose, accepted_at is not null as accepted from scb.consents where user_id = $1
+       order by created_at desc limit 2`, [demo.users.org_film]);
+    expect(rows.map((r) => `${r.purpose}:${r.accepted}`).sort())
+      .toEqual(["EXTERNAL_TASTE_QUERY:false", "SHARED_SESSION:false"]);
+    // Re-saving without changing either choice records nothing new.
+    await ok(api("save_group_brief", demo.users.org_film, demo.groups.film_society, brief.budget_pence,
+      brief.expected_seats, json(brief.availability), "ASK_FIRST", false, brief.access_requirements, json([]), randomUUID()));
+    const after = await admin.query("select count(*)::int as n from scb.consents where user_id = $1", [demo.users.org_film]);
+    expect(after.rows[0].n - before.rows[0].n).toBe(2);
+  });
+});
+
+describe("in-app updates (T13)", () => {
+  it("shows lifecycle events only to people who may see the proposal", async () => {
+    const other = await createDemo();
+    const venue = await ok<{ updates: Array<{ action: string }> }>(
+      api("list_my_updates", demo.users.venue_manager, demo.workspace_id, 50));
+    expect(venue.updates.some((u) => u.action === "proposal.published")).toBe(true);
+
+    const participant = await ok<{ updates: Array<{ action: string }> }>(
+      api("list_my_updates", people(demo, "book_club")[2]!, demo.workspace_id, 50));
+    expect(participant.updates.every((u) => u.action !== "proposal.review_requested")).toBe(true);
+
+    const walker = await ok<{ updates: unknown[] }>(api("list_my_updates", demo.users.org_walk, demo.workspace_id, 50));
+    expect(walker.updates).toEqual([]);
+    expect(await code(api("list_my_updates", other.users.venue_manager, demo.workspace_id, 50))).toBe("NOT_FOUND");
+  });
+});

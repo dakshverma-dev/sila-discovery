@@ -204,7 +204,7 @@ create function scb_api.save_group_brief(
   p_availability jsonb, p_sharing_choice text, p_external_query_consent boolean,
   p_access_requirements text[], p_references jsonb, p_request uuid
 ) returns jsonb language plpgsql security definer set search_path = '' as $$
-declare g scb.groups; next_version integer; brief_id uuid; ref jsonb; w jsonb; errors jsonb := '{}';
+declare g scb.groups; previous scb.group_briefs; next_version integer; brief_id uuid; ref jsonb; w jsonb; errors jsonb := '{}';
 begin
   select * into g from scb.groups where id = p_group;
   if g.id is null or not scb.is_group_member(p_actor, p_group) then
@@ -247,6 +247,21 @@ begin
   end if;
 
   select coalesce(max(version), 0) + 1 into next_version from scb.group_briefs where group_id = p_group;
+  -- Consent choices made on the brief are recorded as purpose-specific consent
+  -- events whenever they change (D19), separately for sharing and external queries.
+  select * into previous from scb.group_briefs where group_id = p_group order by version desc limit 1;
+  if previous.id is null or previous.external_query_consent is distinct from coalesce(p_external_query_consent, false) then
+    insert into scb.consents (workspace_id, user_id, purpose, notice_version, accepted_at, revoked_at)
+    values (g.workspace_id, p_actor, 'EXTERNAL_TASTE_QUERY', 'brief-2026-10',
+            case when coalesce(p_external_query_consent, false) then now() end,
+            case when not coalesce(p_external_query_consent, false) then now() end);
+  end if;
+  if previous.id is null or (previous.sharing_choice = 'WILLING_TO_SHARE') <> (p_sharing_choice = 'WILLING_TO_SHARE') then
+    insert into scb.consents (workspace_id, user_id, purpose, notice_version, accepted_at, revoked_at)
+    values (g.workspace_id, p_actor, 'SHARED_SESSION', 'brief-2026-10',
+            case when p_sharing_choice = 'WILLING_TO_SHARE' then now() end,
+            case when p_sharing_choice <> 'WILLING_TO_SHARE' then now() end);
+  end if;
   insert into scb.group_briefs (workspace_id, group_id, version, budget_pence, expected_seats, availability,
     sharing_choice, external_query_consent, access_requirements, created_by)
   values (g.workspace_id, p_group, next_version, p_budget_pence, p_expected_seats, p_availability,

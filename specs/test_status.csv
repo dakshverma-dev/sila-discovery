@@ -11,10 +11,10 @@ T09,R09,Covered,"tests/db/booking.test.ts revision test; tests/e2e/sandbox.spec.
 T10,R10,Covered,"tests/db/booking.test.ts (accept, decline reversal, only included organiser)",
 T11,R11 N02,Covered,"tests/db/concurrency.test.ts (51 concurrent attempts for 30 seats, duplicate person, key replay); tests/db/booking.test.ts (idempotency conflict, last seat)",
 T12,R12,Partial,"Concurrent confirmations (one wins); stale quote NOT_READY; withdrawn seat reverts readiness","Manager of a different venue in the same workspace is not tested (sandbox has one venue)."
-T13,R13,Partial,"Expiry at database deadline, pre-confirmation withdrawal, cancellation with audited reason","In-app notifications are not implemented."
+T13,R13,Covered,"Expiry at database deadline, pre-confirmation withdrawal, cancellation with audited reason; in-app updates scoped to viewers (tests/db/privacy.test.ts)",
 T14,R14 N05,Covered,"tests/db/match-run.test.ts (lease once, recover after expiry, replay without duplicate drafts or evidence)",
 T15,R15,Partial,"Distinct sandboxes, persona validation, forged capability rejection (tests/unit/capability.test.ts, tests/db/booking.test.ts)","Rate limiting is per instance (RISK13)."
-T16,R16 N07,Partial,"tests/db/privacy.test.ts (consent records, scoped export, deletion withdraws seats and revokes persona)","Consent records are not yet linked to the brief's external-query flag; erasure from backups is not addressed."
+T16,R16 N07,Partial,"tests/db/privacy.test.ts (consent records including brief choice changes, scoped export, deletion withdraws seats and revokes persona)","Erasure from backups is not addressed."
 T17,R17,Not started,,"No paired benchmark with and without Qloo evidence; no outcome event pipeline."
 T18,R18,Partial,"Operator cancellation with mandatory reason; append-only audit trigger; operator activity view","No venue verification or support workflow for operators."
 T19,N03,Partial,"npm run perf: worst-case solver median 1.6 s on one laptop (README)","No transaction-load p50/p95 measurement."
