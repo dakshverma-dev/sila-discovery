@@ -462,10 +462,11 @@ end $$;
 
 -- Venue records delivery (CONFIRMED -> COMPLETED).
 create function scb_api.complete_proposal(
-  p_actor uuid, p_proposal uuid, p_request uuid, p_idem_key text
+  p_actor uuid, p_proposal uuid, p_request uuid, p_idem_key text, p_attended uuid[] default null
 ) returns jsonb language plpgsql security definer set search_path = '' as $$
 declare
-  p scb.proposals; payload jsonb := jsonb_build_object('proposal', p_proposal);
+  p scb.proposals; payload jsonb := jsonb_build_object('proposal', p_proposal, 'attended', p_attended);
+  attended integer := 0;
   replay jsonb; result jsonb;
 begin
   select * into p from scb.proposals where id = p_proposal for update;
@@ -480,8 +481,18 @@ begin
     result := scb.err('PROPOSAL_CLOSED', 'Only a confirmed booking can be completed.');
   else
     update scb.proposals set state = 'COMPLETED', updated_at = now() where id = p.id;
-    perform scb.audit(p.workspace_id, p_actor, 'proposal.completed', p.id, p_request);
-    result := scb.ok(jsonb_build_object('proposal_id', p.id, 'state', 'COMPLETED'));
+    -- Attendance is recorded separately from reservation (D14). An omitted list
+    -- leaves seats as reserved; a supplied list marks everyone else a no-show.
+    if p_attended is not null then
+      update scb.reservations set status = case when id = any(p_attended) then 'ATTENDED' else 'NO_SHOW' end,
+             updated_at = now()
+       where proposal_version_id = p.current_version_id and status = 'RESERVED';
+      select count(*) into attended from scb.reservations
+       where proposal_version_id = p.current_version_id and status = 'ATTENDED';
+    end if;
+    perform scb.audit(p.workspace_id, p_actor, 'proposal.completed', p.id, p_request,
+                      jsonb_build_object('attended', attended));
+    result := scb.ok(jsonb_build_object('proposal_id', p.id, 'state', 'COMPLETED', 'attended', attended));
   end if;
   return scb.idem_finish(p.workspace_id, p_actor, 'complete', p_idem_key, payload, result);
 end $$;

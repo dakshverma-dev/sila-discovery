@@ -302,8 +302,8 @@ describe("revisions, expiry and cancellation (T13, T14)", () => {
     await new Promise((r) => setTimeout(r, 1700));
     expect(await code(reserve(demo, people(demo, "book_club")[2]!, draft.proposal_id, pub.proposal_version_id,
                               "book_club"))).toBe("PROPOSAL_EXPIRED");
-    const { rows } = await admin.query("select scb_api.expire_proposals() as n");
-    expect(rows[0].n).toBeGreaterThanOrEqual(1);
+    // pg_cron may already have expired it; either way the outcome must be EXPIRED.
+    await admin.query("select scb_api.expire_proposals()");
     expect(await proposalState(draft.proposal_id)).toBe("EXPIRED");
     const { rows: slot } = await admin.query("select status from scb.slots where id = $1", [demo.slots.curator_session_1]);
     expect(slot[0].status).toBe("AVAILABLE");

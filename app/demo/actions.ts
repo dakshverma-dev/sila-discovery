@@ -2,15 +2,14 @@
 
 import { randomUUID } from "node:crypto";
 import { after } from "next/server";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { processMatchRun } from "@/lib/agent/run";
 import { getDemoSession, requireDemoSession, setDemoCookie, clearDemoCookie } from "@/lib/auth/demo-session";
 import { callApi, type ApiResult } from "@/lib/db/api";
 import { getPool } from "@/lib/db/pool";
-import { buildDemoDefinition, londonToUtc } from "@/lib/demo/catalogue";
+import { londonToUtc } from "@/lib/demo/catalogue";
+import { createSandbox } from "@/lib/demo/session";
 import { parsePounds } from "@/lib/domain/money";
-import { allowRequest } from "@/lib/server/rate-limit";
 
 /*
  * Every action derives the actor from the verified sandbox capability, never
@@ -42,21 +41,8 @@ function londonInput(value: string): string | null {
 }
 
 export async function startSandbox(): Promise<void> {
-  const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
-  const limit = Number(process.env.SANDBOX_RATE_LIMIT) || 5;
-  if (!allowRequest(`sandbox:${ip}`, limit, 10 * 60_000)) redirect("/?error=RATE_LIMITED");
-  let result: ApiResult<{ workspace_id: string; users: Record<string, string> }>;
-  try {
-    result = await callApi("create_demo_workspace", [buildDemoDefinition()]);
-  } catch {
-    redirect("/?error=DATABASE_UNAVAILABLE");
-  }
-  if (!result.ok) redirect(`/?error=${result.error.code}`);
-  await setDemoCookie({
-    w: result.data.workspace_id,
-    p: result.data.users.org_book!,
-    exp: Math.floor(Date.now() / 1000) + 24 * 3600,
-  });
+  const r = await createSandbox();
+  if (!r.ok) redirect(`/?error=${r.code}`);
   redirect("/demo?notice=SANDBOX_STARTED");
 }
 

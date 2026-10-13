@@ -9,9 +9,10 @@ alter table scb.proposals add column review_requested_by uuid references scb.use
 -- Queues a run for one organiser's group, freezing every input it may use.
 -- The snapshot is server-side only; requesters never receive other groups' briefs.
 create function scb_api.create_match_run(
-  p_actor uuid, p_group uuid, p_source_mode text, p_request uuid
+  p_actor uuid, p_group uuid, p_source_mode text, p_request uuid,
+  p_experience_ids uuid[] default null, p_expected_brief_versions jsonb default null
 ) returns jsonb language plpgsql security definer set search_path = '' as $$
-declare g scb.groups; snapshot jsonb; run_id uuid; missing text[];
+declare g scb.groups; snapshot jsonb; run_id uuid; missing text[]; stale text;
 begin
   select * into g from scb.groups where id = p_group;
   if g.id is null or not (scb.is_group_organiser(p_actor, p_group) or scb.is_operator(p_actor, g.workspace_id)) then
@@ -40,6 +41,19 @@ begin
   if cardinality(missing) > 0 then
     return scb.err('NEEDS_INPUT', 'Complete the group brief before requesting suggestions.', false,
                    jsonb_build_object('fields', to_jsonb(missing), 'actor', 'ORGANISER'));
+  end if;
+
+  -- Optional client expectation of brief versions (D16 MatchRunInput): a stale
+  -- view of any group's brief is a conflict, not a silent re-interpretation.
+  if p_expected_brief_versions is not null then
+    select k into stale from jsonb_each_text(p_expected_brief_versions) as e(k, v)
+     where coalesce((select max(version) from scb.group_briefs b
+                     where b.group_id::text = k and b.workspace_id = g.workspace_id), -1) <> v::integer
+     limit 1;
+    if stale is not null then
+      return scb.err('VERSION_CONFLICT', 'A group brief has changed. Refresh and try again.', false,
+                     jsonb_build_object('group_id', stale));
+    end if;
   end if;
 
   select jsonb_build_object(
@@ -79,6 +93,7 @@ begin
       from scb.experiences e
       where e.workspace_id = g.workspace_id and e.approval_status = 'APPROVED'
         and exists (select 1 from scb.quotes q where q.experience_id = e.id)
+        and (p_experience_ids is null or e.id = any(p_experience_ids))
       limit 10), '[]'),
     'anchor_universe', coalesce((
       select jsonb_agg(distinct a.entity_id) from scb.experience_anchors a

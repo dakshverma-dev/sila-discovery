@@ -43,6 +43,7 @@ const FUNCTIONS = [
   "request_venue_review",
   "get_quote_terms",
   "demo_simulate",
+  "export_my_data",
 ] as const;
 
 export type ApiFunction = (typeof FUNCTIONS)[number];
