@@ -5,7 +5,9 @@ import { after } from "next/server";
 import { redirect } from "next/navigation";
 import { processMatchRun } from "@/lib/agent/run";
 import { getDemoSession, requireDemoSession, setDemoCookie, clearDemoCookie } from "@/lib/auth/demo-session";
-import { callApi, type ApiResult } from "@/lib/db/api";
+import { callApi, json, type ApiResult } from "@/lib/db/api";
+import { parseBriefForm } from "@/lib/demo/brief-form";
+import type { Overview } from "@/lib/demo/views";
 import { getPool } from "@/lib/db/pool";
 import { londonToUtc } from "@/lib/demo/catalogue";
 import { createSandbox } from "@/lib/demo/session";
@@ -167,4 +169,47 @@ export async function simulate(form: FormData): Promise<void> {
   const what = field(form, "what");
   const r = await callApi<{ attempted: number }>("demo_simulate", [s.workspaceId, s.actorId, id, what]);
   back(`/demo/proposals/${id}`, r, "SIMULATED");
+}
+
+/** Saves a new immutable brief version for a group the persona organises (R03). */
+export async function saveBrief(form: FormData): Promise<void> {
+  const s = await requireDemoSession();
+  const groupId = field(form, "group_id");
+  const path = `/demo/groups/${groupId}/brief`;
+  const parsed = parseBriefForm(form);
+  if (!parsed.ok) redirect(`${path}?error=VALIDATION_FAILED&fields=${parsed.fields.join(",")}`);
+  const b = parsed.brief;
+  const r = await callApi("save_group_brief", [
+    s.actorId, groupId, b.budget_pence, b.expected_seats, json(b.availability), b.sharing_choice,
+    b.external_query_consent, b.access_requirements, json(b.references), randomUUID(),
+  ]);
+  if (!r.ok) {
+    const fields = Object.keys((r.error.details?.field_errors as Record<string, unknown>) ?? {}).join(",");
+    redirect(`${path}?error=${r.error.code}${fields ? `&fields=${fields}` : ""}`);
+  }
+  redirect(`/demo?notice=BRIEF_SAVED`);
+}
+
+/**
+ * Stores the organiser's chosen Qloo entity for one reference as a new brief
+ * version. The ID comes from a server-side search result, never free text.
+ */
+export async function chooseReference(form: FormData): Promise<void> {
+  const s = await requireDemoSession();
+  const groupId = field(form, "group_id");
+  const index = Number(field(form, "index"));
+  const path = `/demo/groups/${groupId}/brief`;
+  const [entityId, subtype] = field(form, "choice").split("|");
+  const overview = await callApi<Overview>("get_workspace_overview", [s.actorId, s.workspaceId]);
+  const group = overview.ok ? overview.data.organised_groups.find((g) => g.id === groupId) : undefined;
+  const brief = group?.brief;
+  if (!brief || !brief.references[index] || !entityId || !subtype) redirect(`${path}?error=VALIDATION_FAILED`);
+  const references = brief.references.map((r, i) =>
+    i === index ? { ...r, entity_id: entityId, subtype, resolved: true } : r,
+  );
+  const result = await callApi("save_group_brief", [
+    s.actorId, groupId, brief.budget_pence, brief.expected_seats, json(brief.availability), brief.sharing_choice,
+    brief.external_query_consent, brief.access_requirements, json(references), randomUUID(),
+  ]);
+  back(path, result, "REFERENCE_RESOLVED");
 }

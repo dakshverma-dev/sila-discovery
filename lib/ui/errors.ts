@@ -35,6 +35,8 @@ export const NOTICE_COPY: Record<string, string> = {
   CONFIRMED: "The venue has approved this reservation booking. Payment has not been collected.",
   CANCELLED: "The proposal was cancelled and the reason recorded.",
   COMPLETED: "Delivery recorded.",
+  BRIEF_SAVED: "Saved as a new brief version. Earlier suggestions keep the version they were based on.",
+  REFERENCE_RESOLVED: "Reference linked to the selected Qloo entity.",
   SIMULATED: "Simulated actions ran for the fictional personas through the same guarded rules.",
 };
 

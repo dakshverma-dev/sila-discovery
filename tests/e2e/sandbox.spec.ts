@@ -125,3 +125,32 @@ test("the sandbox requires a capability", async ({ browser }) => {
   await expect(page).toHaveURL(/error=SANDBOX_EXPIRED/);
   await context.close();
 });
+
+test("an organiser edits the brief, sees field errors, and lookups degrade honestly", async ({ page }) => {
+  await startSandbox(page);
+  await page.getByRole("region", { name: "Illustrative book club" }).getByRole("link", { name: "Edit brief" }).click();
+  await expect(page.getByRole("heading", { name: /group brief/ })).toBeVisible();
+
+  // Invalid time window is reported and linked to the field.
+  await page.locator("#window_0_end").fill("09:00");
+  await page.getByRole("button", { name: "Save brief" }).click();
+  await expect(page.getByRole("link", { name: "Time window 1" })).toBeVisible();
+
+  // Reload clean, add a reference and switch to "ask us first".
+  await page.goto(page.url().split("?")[0]!);
+  await page.getByLabel("Reference 1").fill("A synthetic coastal memoir");
+  await page.getByLabel(/Ask us first/).check();
+  await page.getByLabel(/Allow these references to be looked up with Qloo/).check();
+  await page.getByRole("button", { name: "Save brief" }).click();
+  await expect(page.getByRole("status")).toContainText("Saved as a new brief version");
+  await expect(page.getByText("Brief version 2").first()).toBeVisible();
+  // "Ask us first" is not consent to share, so the group is no longer offered matching.
+  await expect(
+    page.getByRole("region", { name: "Illustrative book club" }).getByRole("button", { name: "Find shared sessions" }),
+  ).toHaveCount(0);
+
+  await page.getByRole("region", { name: "Illustrative book club" }).getByRole("link", { name: "Edit brief" }).click();
+  await page.getByRole("link", { name: "Look up in Qloo" }).first().click();
+  // Without a configured key the reference stays unlinked; nothing is guessed.
+  await expect(page.getByRole("status")).toContainText(/not configured|no entity is guessed/);
+});

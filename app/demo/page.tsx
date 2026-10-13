@@ -64,7 +64,10 @@ export default async function DemoDashboard({
               ) : (
                 <p>No brief saved yet.</p>
               )}
-              <p className="muted">Brief version {g.brief?.version ?? "–"}. Members: {g.member_count}.</p>
+              <p className="muted">
+                Brief version {g.brief?.version ?? "–"}. Members: {g.member_count}.{" "}
+                <Link href={`/demo/groups/${g.id}/brief`}>Edit brief</Link>
+              </p>
             </div>
             <div className="surface stack">
               <h3>Find a shared session</h3>

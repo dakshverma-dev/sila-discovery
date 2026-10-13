@@ -39,7 +39,13 @@ export interface Brief {
   sharing_choice: "WILLING_TO_SHARE" | "PRIVATE_ONLY" | "ASK_FIRST";
   external_query_consent: boolean;
   access_requirements: string[];
-  references: Array<{ input_label: string; resolved: boolean; declared_meaning: string | null }>;
+  references: Array<{
+    input_label: string;
+    resolved: boolean;
+    declared_meaning: string | null;
+    entity_id: string | null;
+    subtype: string | null;
+  }>;
 }
 
 export interface Overview {
