@@ -213,3 +213,13 @@ export async function chooseReference(form: FormData): Promise<void> {
   ]);
   back(path, result, "REFERENCE_RESOLVED");
 }
+
+/** Deletes the acting persona's account data and ends its session (R16). */
+export async function deleteAccount(form: FormData): Promise<void> {
+  const s = await requireDemoSession();
+  if (form.get("confirm") !== "on") redirect("/demo/account?error=VALIDATION_FAILED");
+  const r = await callApi("delete_my_account", [s.actorId, randomUUID()]);
+  if (!r.ok) redirect(`/demo/account?error=${r.error.code}`);
+  await clearDemoCookie();
+  redirect("/?notice=ACCOUNT_DELETED");
+}

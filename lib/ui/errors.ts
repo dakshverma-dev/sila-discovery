@@ -23,6 +23,7 @@ export const ERROR_COPY: Record<string, string> = {
 };
 
 export const NOTICE_COPY: Record<string, string> = {
+  ACCOUNT_DELETED: "That persona's account was deleted. Start a new sandbox to continue exploring.",
   SANDBOX_STARTED: "Your private judge sandbox is ready. Everything in it is fictional and expires within 24 hours.",
   PERSONA_SWITCHED: "You are now acting as a different persona.",
   REVIEW_REQUESTED: "Sent to the venue for review. Nothing is published until the venue manager publishes it.",

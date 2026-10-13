@@ -63,6 +63,7 @@ export default async function DemoLayout({ children }: { children: React.ReactNo
               Switch
             </button>
           </form>
+          <Link href="/demo/account">Your data</Link>
           <form action={endSandbox}>
             <button type="submit" className="link-button">
               End sandbox

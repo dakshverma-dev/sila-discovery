@@ -44,6 +44,8 @@ const FUNCTIONS = [
   "get_quote_terms",
   "demo_simulate",
   "export_my_data",
+  "record_consent",
+  "delete_my_account",
 ] as const;
 
 export type ApiFunction = (typeof FUNCTIONS)[number];
