@@ -195,7 +195,10 @@ begin
          nullif(i->>'rank', '')::integer, nullif(i->>'raw_score', '')::double precision,
          coalesce(i->'coverage', '{}'), (i->>'fetched_at')::timestamptz, (i->>'fetched_at')::timestamptz + interval '24 hours'
   from jsonb_array_elements(p_items) i
-  where exists (select 1 from scb.groups g where g.id = (i->>'group_id')::uuid and g.workspace_id = r.workspace_id);
+  where exists (select 1 from scb.groups g where g.id = (i->>'group_id')::uuid and g.workspace_id = r.workspace_id)
+    -- Idempotent under worker recovery: the same run, group and entity is stored once.
+    and not exists (select 1 from scb.evidence_records e where e.run_id = r.id
+                    and e.group_id = (i->>'group_id')::uuid and e.entity_id = i->>'entity_id');
   get diagnostics n = row_count;
   return scb.ok(jsonb_build_object('recorded', n));
 end $$;

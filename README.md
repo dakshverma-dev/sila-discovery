@@ -15,6 +15,8 @@ Hackathon build in progress. What exists and is covered by automated tests:
 | Judge sandbox (`/demo`) | Isolated synthetic workspace per visitor with persona switching: request suggestions, send for venue review, publish, accept or decline, reserve one seat, withdraw, confirm, revise the price, cancel, complete, edit the group brief, export or delete data. |
 | HTTP API (`/api/v1`) | D16 routes for proposals, decisions, reservations, confirmation, cancellation, completion, withdrawal, match runs, demo sessions, consents, export and deletion. |
 
+Acceptance-test coverage for T01 to T23 is tracked honestly in `specs/test_status.csv`.
+
 **Not yet done or not yet verified**
 
 - **No live Qloo call has been made.** The adapter and live-mode runs are tested against hand-written responses only; the `/search` envelope and affinity field are unverified (RISK11). The sandbox always uses synthetic evidence because its programmes and groups are fictional.
@@ -41,6 +43,7 @@ npm run dev                   # http://localhost:3000 -> "Start a sandbox"
 | `npm run test:db` | Integration tests against the local database: lifecycle, cross-workspace access, last-seat race, competing confirmations, revision, expiry, match runs, privacy |
 | `npm run test:e2e` | Playwright journeys at desktop and 320 px, the `/api/v1` contract and axe WCAG 2.2 AA scans (builds and starts the app on port 3100) |
 | `npm run perf` | Worst-case solver benchmark at the input caps |
+| `npm run check:bundle` | After a build, fail if secrets or server-only markers appear in browser JavaScript |
 | `npm run typecheck` / `npm run lint` / `npm run build` | Static checks and production build |
 | `npm run test:reference` | Python reference checks in `specs/` |
 | `npm run db:reset` | Re-apply migrations and seed locally |

@@ -41,6 +41,23 @@ begin
     return scb.err('VALIDATION_FAILED', 'Required seats do not match the venue quote.');
   end if;
 
+  -- A recovered worker may replay a run (T14). The same run, slot and coalition
+  -- returns the existing draft instead of creating a duplicate.
+  if p_run is not null then
+    perform pg_advisory_xact_lock(hashtextextended(p_run::text || p_slot::text, 0));
+    select p.id, p.current_version_id into proposal_id, version_id
+      from scb.proposals p
+     where p.run_id = p_run and p.slot_id = p_slot
+       and (select array_agg(pg.group_id order by pg.group_id) from scb.proposal_groups pg
+            where pg.proposal_version_id = p.current_version_id)
+           = (select array_agg(x order by x) from unnest(p_group_ids) x)
+     limit 1;
+    if proposal_id is not null then
+      return scb.ok(jsonb_build_object('proposal_id', proposal_id, 'proposal_version_id', version_id,
+                                       'replayed', true));
+    end if;
+  end if;
+
   insert into scb.proposals (workspace_id, slot_id, experience_id, run_id, state, source_mode, rationale, created_by)
   values (p_workspace, s.id, s.experience_id, p_run, 'DRAFT', p_source_mode, coalesce(p_rationale, '{}'), p_actor)
   returning id into proposal_id;

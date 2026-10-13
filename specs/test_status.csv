@@ -1,0 +1,24 @@
+Test,Requirement,Status,Evidence,Remaining gap
+T01,R01 N01,Partial,"tests/db/booking.test.ts (authorisation, cross-workspace NOT_FOUND, role-restricted actions, private projection); tests/e2e/api.spec.ts (401, 403, 404)","Pilot identities (Supabase Auth) not built; only sandbox personas are exercised."
+T02,R02,Partial,"Quote immutability trigger; publish blocks unapproved programme (NOT_READY) and stale quote; create_quote rejects negative pence","No catalogue editor for experiences, anchors or slots; overlapping slots are not rejected."
+T03,R03,Covered,"tests/unit/brief-form.test.ts; tests/e2e/sandbox.spec.ts brief journey; create_match_run NEEDS_INPUT with field list (tests/db/match-run.test.ts)",
+T04,R04,Partial,"Unresolved references keep no entity ID (tests/unit/brief-form.test.ts); lookup reports unavailability honestly (e2e)","Live /search disambiguation not exercised: no Qloo key yet."
+T05,R05,Partial,"tests/unit/qloo-adapter.test.ts (401/403/429/5xx, timeout, empty, malformed, budget); live-mode run with mocked provider and outage (tests/db/match-run.test.ts)","No private live contract test yet; cached mode not implemented (cache table exists, unused)."
+T06,R06,Partial,"Only venue-approved anchors form the universe; NO_EXPERIENCE_ANCHORS is unknown, not scored (tests/unit/utility.test.ts)","Anchor approval workflow UI not built; organiser meaning edits are retained per brief version but not separately tested."
+T07,R07,Covered,"tests/unit/solver.test.ts (time, access, budget, sharing, capacity, deterministic tie-breaks, must-include group); tests/db/match-run.test.ts",
+T08,R08 N06,Partial,"Template explanations cite anchor evidence (lib/agent/explain.ts); untrusted text rendered as text","No LLM is used, so injected-instruction and fake-evidence-ID tests for generated text do not apply yet."
+T09,R09,Covered,"tests/db/booking.test.ts revision test; tests/e2e/sandbox.spec.ts price revision",
+T10,R10,Covered,"tests/db/booking.test.ts (accept, decline reversal, only included organiser)",
+T11,R11 N02,Covered,"tests/db/concurrency.test.ts (51 concurrent attempts for 30 seats, duplicate person, key replay); tests/db/booking.test.ts (idempotency conflict, last seat)",
+T12,R12,Partial,"Concurrent confirmations (one wins); stale quote NOT_READY; withdrawn seat reverts readiness","Manager of a different venue in the same workspace is not tested (sandbox has one venue)."
+T13,R13,Partial,"Expiry at database deadline, pre-confirmation withdrawal, cancellation with audited reason","In-app notifications are not implemented."
+T14,R14 N05,Covered,"tests/db/match-run.test.ts (lease once, recover after expiry, replay without duplicate drafts or evidence)",
+T15,R15,Partial,"Distinct sandboxes, persona validation, forged capability rejection (tests/unit/capability.test.ts, tests/db/booking.test.ts)","Rate limiting is per instance (RISK13)."
+T16,R16 N07,Partial,"tests/db/privacy.test.ts (consent records, scoped export, deletion withdraws seats and revokes persona)","Consent records are not yet linked to the brief's external-query flag; erasure from backups is not addressed."
+T17,R17,Not started,,"No paired benchmark with and without Qloo evidence; no outcome event pipeline."
+T18,R18,Partial,"Operator cancellation with mandatory reason; append-only audit trigger; operator activity view","No venue verification or support workflow for operators."
+T19,N03,Partial,"npm run perf: worst-case solver median 1.6 s on one laptop (README)","No transaction-load p50/p95 measurement."
+T20,N04,Partial,"axe WCAG 2.2 AA scans of ten screens (tests/e2e/accessibility.spec.ts); 320 px journeys without horizontal scroll","Manual keyboard, screen-reader and 200% zoom review not done."
+T21,N08,Partial,"npm run check:bundle scans browser JS for secrets and server-only markers; request IDs in API envelopes","No repository-wide secret scanner in CI; no simulated incident."
+T22,N09,Partial,"Pinned dependencies and lockfile; migrations and seed reproduce the sandbox locally","Not yet reproduced on a clean machine."
+T23,N10,Not started,,"Not deployed."

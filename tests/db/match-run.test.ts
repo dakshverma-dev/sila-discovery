@@ -166,3 +166,25 @@ describe("job leasing (D10 worker recovery)", () => {
     expect(await processMatchRun(queued.run_id, { pool: app })).toBe("SUCCEEDED");
   });
 });
+
+describe("worker crash recovery without duplicates (T14)", () => {
+  it("replaying a run after drafts were written creates no duplicate drafts or evidence", async () => {
+    const queued = await ok<{ run_id: string }>(
+      api("create_match_run", demo.users.org_makers, demo.groups.makers_group, "synthetic", randomUUID()));
+    expect(await processMatchRun(queued.run_id, { pool: app })).toBe("SUCCEEDED");
+    const count = async () => {
+      const { rows } = await admin.query(
+        `select (select count(*)::int from scb.proposals where run_id = $1) as drafts,
+                (select count(*)::int from scb.evidence_records where run_id = $1) as evidence`, [queued.run_id]);
+      return rows[0];
+    };
+    const before = await count();
+    expect(before.drafts).toBeGreaterThan(0);
+    // Simulate a worker that wrote drafts and evidence, then died before finishing.
+    await admin.query(
+      `update scb.match_runs set state = 'RUNNING', lease_until = now() - interval '1 second', result = null
+       where id = $1`, [queued.run_id]);
+    expect(await processMatchRun(queued.run_id, { pool: app })).toBe("SUCCEEDED");
+    expect(await count()).toEqual(before);
+  });
+});
