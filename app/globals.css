@@ -1,0 +1,149 @@
+/* Design tokens from D18 / specs/design_tokens.json. Contrast still requires measured verification. */
+:root {
+  --colour-text: #1c2421;
+  --colour-canvas: #faf9f6;
+  --colour-surface: #ffffff;
+  --colour-primary: #245a45;
+  --colour-muted: #58635d;
+  --colour-border: #d5dbd6;
+  --colour-danger: #a52424;
+  --colour-warning: #7a4a00;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --radius: 8px;
+  --target: 44px;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--colour-canvas);
+  color: var(--colour-text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0 0 var(--space-3);
+}
+
+h1 {
+  font-size: 2.25rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+a {
+  color: var(--colour-primary);
+}
+
+:focus-visible {
+  outline: 3px solid var(--colour-primary);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  background: var(--colour-surface);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+.demo-banner {
+  background: var(--colour-warning);
+  color: #ffffff;
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+  font-weight: 600;
+}
+
+.page {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4) var(--space-7);
+}
+
+.muted {
+  color: var(--colour-muted);
+}
+
+.surface {
+  background: var(--colour-surface);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+}
+
+.stack > * + * {
+  margin-top: var(--space-4);
+}
+
+.grid-2 {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 60rem) {
+  .grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.badge {
+  display: inline-block;
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+  padding: 0 var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+dl.terms {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+}
+
+dl.terms dt {
+  color: var(--colour-muted);
+}
+
+dl.terms dd {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
