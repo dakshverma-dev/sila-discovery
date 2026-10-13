@@ -17,7 +17,8 @@
     "test:reference": "python -m unittest discover -s specs -p \"test_*.py\"",
     "test:db": "vitest run --config vitest.db.config.ts",
     "db:reset": "supabase db reset",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "perf": "vitest run --config vitest.perf.config.ts"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
