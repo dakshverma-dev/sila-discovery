@@ -20,5 +20,5 @@ T18,R18,Partial,"Operator cancellation with mandatory reason; append-only audit 
 T19,N03,Partial,"npm run perf: worst-case solver median 1.6 s on one laptop (README)","No transaction-load p50/p95 measurement."
 T20,N04,Partial,"axe WCAG 2.2 AA scans of ten screens (tests/e2e/accessibility.spec.ts); 320 px journeys without horizontal scroll","Manual keyboard, screen-reader and 200% zoom review not done."
 T21,N08,Partial,"npm run check:bundle scans browser JS for secrets and server-only markers; request IDs in API envelopes","No repository-wide secret scanner in CI; no simulated incident."
-T22,N09,Partial,"Pinned dependencies and lockfile; migrations and seed reproduce the sandbox locally","Not yet reproduced on a clean machine."
+T22,N09,Covered,"Pinned dependencies and lockfile; CI integration job rebuilds the database from migrations and passes DB and e2e suites on a clean runner (.github/workflows/ci.yml)",
 T23,N10,Not started,,"Not deployed."
