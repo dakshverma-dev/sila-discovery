@@ -295,11 +295,18 @@ describe("revisions, expiry and cancellation (T13, T14)", () => {
                       [demo.workspace_id]);
     await admin.query(`update scb.slots set status = 'AVAILABLE' where workspace_id = $1`, [demo.workspace_id]);
     const draft = await saveCuratorDraft(demo);
-    const pub = await publish(demo, draft.proposal_id, new Date(Date.now() + 1500).toISOString());
+    // Deadlines are judged by database time (BR12), so derive and await it from the database clock.
+    const { rows: clock } = await admin.query("select (now() + interval '2 seconds') as deadline");
+    const deadline: Date = clock[0].deadline;
+    const pub = await publish(demo, draft.proposal_id, deadline.toISOString());
     await acceptAll(demo, draft.proposal_id, pub.proposal_version_id);
     const seat = await reserve(demo, people(demo, "book_club")[1]!, draft.proposal_id, pub.proposal_version_id, "book_club");
     expect(seat.ok).toBe(true);
-    await new Promise((r) => setTimeout(r, 1700));
+    for (;;) {
+      const { rows: t } = await admin.query("select clock_timestamp() >= $1::timestamptz as passed", [deadline]);
+      if (t[0].passed) break;
+      await new Promise((r) => setTimeout(r, 200));
+    }
     expect(await code(reserve(demo, people(demo, "book_club")[2]!, draft.proposal_id, pub.proposal_version_id,
                               "book_club"))).toBe("PROPOSAL_EXPIRED");
     // pg_cron may already have expired it; either way the outcome must be EXPIRED.
