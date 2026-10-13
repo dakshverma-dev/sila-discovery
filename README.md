@@ -1,4 +1,38 @@
-# Shared Cultural Bookings documentation pack
+# Shared Cultural Bookings
+
+Small Edinburgh communities pool interest and attendance to reserve a venue-approved cultural experience. The system finds a feasible coalition of two to four groups, explains why it fits, collects individual seat reservations and lets the venue confirm the reservation booking. No payment is collected (`payment_status = NOT_COLLECTED`). Built for the Qloo Agentic Hackathon.
+
+## Current status
+
+Early build. Implemented and covered by automated tests:
+
+- `lib/domain/`: deterministic quote economics, hard feasibility checks, ordinal cultural utility, the 2-to-4-group coalition solver with blocker reports, the readiness predicate and the proposal state machine (D13, D14).
+- `lib/providers/qloo/`: server-side adapter for the hackathon host (`/search` and `/v2/insights`) with a per-job call budget, timeouts, bounded retries and strict response parsing (D11). It has only been tested against hand-written synthetic responses; no live Qloo call has been made yet.
+- `/sandbox`: a synthetic judge sandbox that runs the solver on fictional groups. It makes no Qloo requests, reservations or payments.
+
+Not yet built: authentication, Supabase schema and guarded transactions, group briefs, publication, organiser decisions, reservations, venue confirmation, the match-run worker and live Qloo evidence.
+
+## Development
+
+Requires Node.js 22+ and npm. Python 3 is only needed for the specification's reference checks.
+
+```bash
+npm install
+cp .env.example .env.local   # fill in server-side secrets; never commit them
+npm run dev                  # http://localhost:3000
+```
+
+| Script | Purpose |
+| --- | --- |
+| `npm test` | Vitest unit tests |
+| `npm run typecheck` | TypeScript check |
+| `npm run lint` | ESLint |
+| `npm run build` | Production build |
+| `npm run test:reference` | Python reference checks in `specs/` |
+
+`QLOO_API_KEY` is read only on the server, and the adapter refuses any host other than `https://hackathon.api.qloo.com`. Do not commit Qloo responses.
+
+# Specification pack
 
 Version 0.1, 12 October 2026. Proposed implementation baseline.
 
