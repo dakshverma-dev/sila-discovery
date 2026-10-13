@@ -12,23 +12,27 @@ Status: proposed implementation specification. Application acceptance tests rema
 
 ## Design direction
 
-Use a restrained institutional feel with warm neutral surfaces and deep green actions. Typography and spacing should make terms easy to read. Cultural imagery may be used only with a verified licence and an accurate relationship to the venue; fabricated institutional branding is excluded.
+The interface follows the **sila** design (`Design/Sila v2.dc.html`, layered over the Classical design-system base in `Design/_ds/`): an editorial, book-like look on a parchment ground with hairline ink rules, Cormorant Garamond display type over Schibsted Grotesk text, and layered, matted art plates. Each programme takes a composition and a ground colour from `lib/ui/sila/art.ts`; the implementation lives in `app/globals.css` and `components/sila/`.
 
-| Token | Proposed value | Usage |
+Art plates are public-domain or openly licensed works (credited in the footer of every page and beside each composition). They are decorative editorial art, never presented as a venue's collection, partnership or branding. Fabricated institutional branding remains excluded.
+
+| Token | Value | Usage |
 | --- | --- | --- |
-| colour.text | #1C2421 | Primary text; readable against the canvas. |
-| colour.canvas | #FAF9F6 | Page background. |
-| colour.surface | #FFFFFF | Forms and content surfaces. |
-| colour.primary | #245A45 | Primary actions; contrast must be checked in implementation. |
-| colour.muted | #58635D | Secondary text. |
-| colour.border | #D5DBD6 | Subtle boundaries; not relied on alone for meaning. |
-| colour.danger | #A52424 | Blocking errors with text and icon. |
-| colour.warning | #7A4A00 | Warnings and revision notices. |
-| type.body | 16px / 1.5 | System sans-serif stack; no remote font required. |
-| type.heading | 24 to 36px / 1.2 | Clear hierarchy without decorative slogans. |
-| space.scale | 4 8 12 16 24 32 48px | Consistent responsive spacing. |
-| radius | 8px | Controls and surfaces. |
-| target | 44 by 44px preferred | Comfortable touch target; evaluate accessibility exceptions. |
+| colour.ink | oklch(0.22 0.02 50) | Text, rules and primary actions. |
+| colour.parchment | oklch(0.95 0.025 85) | Page background. |
+| colour.ivory | oklch(0.97 0.015 85) | Panels (proposal, ticket) and text on dark grounds. |
+| colour.oxblood | oklch(0.38 0.12 25) | Links, emphasis, small accent text. |
+| colour.cinnabar | oklch(0.58 0.17 35) | "You" marks, large numerals, hover on large text only (fails AA at body size). |
+| colour.jade / ochre / olive / indigo / rose | see `specs/design_tokens.json` | Programme grounds and shared-interest tiles. |
+| type.display | Cormorant Garamond 300–400 | Headings and numerals; the larger, the lighter. |
+| type.body | Schibsted Grotesk, 15px / 1.55 | Text and controls. |
+| type.arabic | Amiri | The ṣila gloss only. |
+| layout.max | 1480px, gutter clamp(16px, 4vw, 64px) | Page width. |
+| breakpoint | 900px | Two-column hero, bands and forms above; one column below. |
+
+Illustrative content (shared-interest percentages, companion groups, running orders, interest counts and group portraits) is labelled on screen until Qloo taste data and venue programme notes exist. "Register interest" is stored only in the viewer's browser and never counts toward a minimum.
+
+A **demo showcase** (`/showcase/[id]`, data in `lib/ui/sila/showcase.json`, taken verbatim from the v2 design) shows seven demonstration experiences on the landing page and after the sandbox's real proposals, each labelled "Demo data". Its commitments are browser-only demonstrations: nothing is stored, reserved or charged. Page scrolling is eased with Lenis, off under prefers-reduced-motion.
 
 ## Components
 
@@ -58,7 +62,7 @@ Use one content column on mobile and a maximum two-column decision layout on des
 
 ## Motion and colour
 
-Use short transition feedback only when it clarifies state. Respect prefers-reduced-motion. Never indicate acceptance, errors or provenance by colour alone. Contrast values in specs/design_tokens.json are proposed tokens and require measured verification.
+Motion follows sila v2: plates unfold, title lines rise, art drifts with scroll and pointer, and the reservation ticket prints (`components/sila/motion.tsx`). All of it is disabled under prefers-reduced-motion. Never indicate acceptance, errors or provenance by colour alone. Contrast values in specs/design_tokens.json are proposed tokens and require measured verification.
 
 ## Component acceptance
 

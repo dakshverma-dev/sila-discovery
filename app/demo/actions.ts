@@ -122,7 +122,7 @@ export async function decide(form: FormData): Promise<void> {
 export async function reserve(form: FormData): Promise<void> {
   const s = await requireDemoSession();
   const id = field(form, "proposal_id");
-  back(`/demo/proposals/${id}`, await callApi("reserve_seat", [
+  back(`/demo/proposals/${id}/reserve`, await callApi("reserve_seat", [
     s.actorId, id, field(form, "version_id"), Number(field(form, "version")), field(form, "group_id"),
     form.get("accept_shared") === "on", form.get("adult") === "on", randomUUID(), field(form, "idem"),
   ]), "RESERVED");

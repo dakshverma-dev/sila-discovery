@@ -7,7 +7,7 @@ test.skip(({ viewport }) => (viewport?.width ?? 0) < 400, "Run once, on the desk
 
 async function scan(page: Page, label: string) {
   // Next streams metadata on dynamic pages; wait for the title rather than racing it.
-  await expect(page).toHaveTitle(/Shared Cultural Bookings/);
+  await expect(page).toHaveTitle(/sila/);
   const result = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
   const summary = result.violations.map((v) => `${v.id} (${v.nodes.length}): ${v.help}`);
   expect(summary, `${label} accessibility violations`).toEqual([]);
@@ -31,9 +31,12 @@ test("core screens have no automatically detectable WCAG AA violations", async (
   await scan(page, "match run");
 
   await page.getByRole("link", { name: "Inspect reasons and send for venue review" }).first().click();
-  await expect(page.getByRole("heading", { name: "Why this option" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Why it was suggested" })).toBeVisible();
   await scan(page, "proposal (organiser)");
   const proposalUrl = new URL(page.url()).pathname;
+  await page.goto(`${proposalUrl}/affinity`);
+  await scan(page, "affinity reading");
+  await page.goto(proposalUrl);
   await page.getByRole("button", { name: "Send this option for venue review" }).click();
   await actAs(page, "Rowan (venue manager)");
   await scan(page, "venue dashboard");
@@ -43,7 +46,9 @@ test("core screens have no automatically detectable WCAG AA violations", async (
   await page.getByRole("button", { name: "Sandbox: Simulate organisers accepting" }).click();
   await actAs(page, "Bram (book club)");
   await page.goto(proposalUrl);
-  await scan(page, "proposal (participant, reservation form)");
+  await scan(page, "proposal (participant)");
+  await page.goto(`${proposalUrl}/reserve`);
+  await scan(page, "commit a place (reservation form)");
   await actAs(page, "Ailsa (book club organiser)");
 
   await page.goto("/demo");
@@ -55,4 +60,13 @@ test("core screens have no automatically detectable WCAG AA violations", async (
 
   await page.goto("/sandbox");
   await scan(page, "matching explorer");
+
+  for (const id of ["print-room", "hokusai", "codex", "wayang", "kente", "haeckel", "hamza"]) {
+    await page.goto(`/showcase/${id}`);
+    await scan(page, `demo proposal ${id}`);
+  }
+  await page.goto("/showcase/kente/affinity");
+  await scan(page, "demo affinity");
+  await page.goto("/showcase/wayang/confirm");
+  await scan(page, "demo confirm");
 });

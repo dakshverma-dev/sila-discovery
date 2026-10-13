@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteFooter, SiteHeader } from "@/components/sila/chrome";
 import { isScenarioId, scenarioInput, SCENARIOS, type ScenarioId } from "@/lib/demo/scenarios";
 import { SYNTHETIC_GROUP_NAMES } from "@/lib/demo/synthetic-fixture";
 import { requiredSeats } from "@/lib/domain/economics";
@@ -15,7 +16,7 @@ import {
 } from "@/lib/ui/copy";
 import { formatSlot } from "@/lib/ui/format";
 
-export const metadata: Metadata = { title: "Judge sandbox · Shared Cultural Bookings" };
+export const metadata: Metadata = { title: "Matching explorer" };
 
 const groupName = (id: string) => SYNTHETIC_GROUP_NAMES[id] ?? id;
 
@@ -32,15 +33,27 @@ export default async function SandboxPage({
 
   return (
     <>
-      <div className="demo-banner" role="note">
-        {COPY.demoBanner}
-      </div>
-      <main id="main" className="page stack">
-        <header className="stack">
-          <p className="muted">
-            <Link href="/">Shared Cultural Bookings</Link>
+      <SiteHeader
+        nav={[
+          { num: "i", label: "Discover", href: "/" },
+          { num: "ii", label: "Affinity", href: null },
+          { num: "iii", label: "Proposal", href: null },
+        ]}
+      />
+      <div className="sandbox-bar">
+        <div className="wrap sandbox-bar-inner">
+          <p className="demo-banner" role="note">
+            <strong>Sandbox</strong>
+            {COPY.demoBanner}
           </p>
-          <h1>Shared session sandbox</h1>
+        </div>
+      </div>
+      <main id="main" className="page stack-lg">
+        <header className="stack">
+          <p className="kicker">
+            <Link href="/">sila</Link> · Matching explorer
+          </p>
+          <h1 className="page-title">Shared session sandbox</h1>
           <p>
             Explore how small groups could pool attendance to reserve one venue-approved session.
             Everything below is synthetic and computed by the deterministic matching rules; no
@@ -86,6 +99,7 @@ export default async function SandboxPage({
           )}
         </section>
       </main>
+      <SiteFooter />
     </>
   );
 }

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteFooter, SiteHeader } from "@/components/sila/chrome";
+import { DemoNav } from "@/components/sila/demo-nav";
 import { requireDemoSession } from "@/lib/auth/demo-session";
 import { callApi } from "@/lib/db/api";
 import type { Persona } from "@/lib/demo/views";
 import { COPY } from "@/lib/ui/copy";
 import { endSandbox, switchPersona } from "./actions";
 
-export const metadata: Metadata = { title: "Judge sandbox · Shared Cultural Bookings" };
+export const metadata: Metadata = { title: { default: "Judge sandbox", template: "%s · sila" } };
 export const dynamic = "force-dynamic";
 
 const ROLE_LABEL: Record<Persona["role"], string> = {
@@ -35,14 +37,17 @@ export default async function DemoLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      <div className="demo-banner" role="note">
-        {COPY.demoBanner} Expires {expires}.
-      </div>
-      <header className="site-header">
-        <div className="site-header-inner">
-          <Link href="/demo" className="brand">
-            Shared Cultural Bookings
-          </Link>
+      <SiteHeader
+        home="/demo"
+        navNode={<DemoNav />}
+        persona={me ? { name: me.display_name, org: me.organisation ?? ROLE_LABEL[me.role] } : null}
+      />
+      <div className="sandbox-bar">
+        <div className="wrap sandbox-bar-inner">
+          <p className="demo-banner" role="note">
+            <strong>Sandbox</strong>
+            {COPY.demoBanner} Expires {expires}.
+          </p>
           <form action={switchPersona} className="persona-switcher">
             <label htmlFor="persona">Acting as</label>
             <select id="persona" name="persona" defaultValue={session.actorId}>
@@ -59,25 +64,20 @@ export default async function DemoLayout({ children }: { children: React.ReactNo
               )}
             </select>
             <input type="hidden" name="return_to" value="/demo" />
-            <button type="submit" className="button button-secondary">
-              Switch
-            </button>
+            <button type="submit">Switch</button>
           </form>
-          <Link href="/demo/account">Your data</Link>
+          <Link href="/demo/account" className="bar-link">
+            Your data
+          </Link>
           <form action={endSandbox}>
-            <button type="submit" className="link-button">
+            <button type="submit" className="bar-link">
               End sandbox
             </button>
           </form>
         </div>
-        {me && (
-          <p className="persona-line">
-            You are <strong>{me.display_name}</strong>
-            {me.organisation ? <> · {me.organisation}</> : null}
-          </p>
-        )}
-      </header>
+      </div>
       {children}
+      <SiteFooter />
     </>
   );
 }

@@ -1,0 +1,938 @@
+[
+ {
+  "id": "print-room",
+  "ref": "Nº 0147",
+  "cat": "Print & Paper",
+  "city": "London, Bloomsbury",
+  "unit": "evening",
+  "layout": "art-left",
+  "lines": [
+   [
+    "An Evening",
+    0
+   ],
+   [
+    "in the Print Room",
+    1
+   ]
+  ],
+  "title": "An Evening in the Print Room",
+  "venue": "The Holloway Collection, Print Study Room",
+  "venueShort": "the Holloway",
+  "dek": "Forty woodcuts, engravings and private-press proofs, out of their boxes for one evening.",
+  "format": "90 minutes · about 40 prints on the tables · up to 36 people · £14",
+  "short": "Both groups keep returning to Dürer, Bewick and the Kelmscott Press. Neither is large enough on its own for the Holloway to open its print room after hours.",
+  "why": "Members of the Hackney Letterpress Circle save, read and visit around type and early printing. Members of the Picture Book Society follow illustrators. Independently, both keep returning to the same things: Dürer’s woodcuts, Thomas Bewick’s wood engravings, early type specimens and the books of the Kelmscott Press. The Holloway will open its print room after hours for thirty people.",
+  "plan": [
+   [
+    "18:30",
+    "Arrive at the Montague Place door. Coats and bags into lockers; pencils only."
+   ],
+   [
+    "18:45",
+    "The curator of prints introduces the selection: Dürer, Bewick, Caslon’s specimen, Kelmscott proofs and Amman’s Ständebuch."
+   ],
+   [
+    "19:15",
+    "Free looking at the tables, with book cradles, weights and a magnifier each."
+   ],
+   [
+    "20:00",
+    "The room closes."
+   ]
+  ],
+  "status": "proposed",
+  "needed": 30,
+  "capacity": 36,
+  "committed": 22,
+  "interested": 13,
+  "price": 14,
+  "dates": [
+   [
+    "2026-11-12",
+    "18:30–20:00",
+    12
+   ],
+   [
+    "2026-11-19",
+    "18:30–20:00",
+    9
+   ],
+   [
+    "2026-11-26",
+    "18:30–20:00",
+    8
+   ]
+  ],
+  "opened": "2 Oct",
+  "deadline": "31 Oct",
+  "subs": [
+   "Since 2 Oct · gathering commitments",
+   "At 30 commitments, the request goes to the Holloway",
+   "The Holloway approves a date"
+  ],
+  "A": {
+   "name": "Hackney Letterpress Circle",
+   "short": "the Circle",
+   "place": "Hackney",
+   "members": 112,
+   "img": "printer",
+   "only": [
+    "Wood and metal type",
+    "Small-run zines",
+    "Risograph printing"
+   ]
+  },
+  "B": {
+   "name": "The Picture Book Society",
+   "short": "the Society",
+   "place": "Online and London",
+   "members": 340,
+   "img": "hare",
+   "only": [
+    "Beatrix Potter",
+    "Contemporary picture books",
+    "Edward Lear"
+   ]
+  },
+  "shared": [
+   [
+    "Dürer’s woodcuts",
+    58,
+    47,
+    "Albrecht Dürer, The Rhinoceros, 1515",
+    "rhino",
+    "50% 55%"
+   ],
+   [
+    "Wood engraving",
+    64,
+    41,
+    "Thomas Bewick, A History of British Birds, 1797",
+    "bewick",
+    "50% 22%"
+   ],
+   [
+    "The Kelmscott Press",
+    71,
+    33,
+    "William Morris and Edward Burne-Jones, The Works of Geoffrey Chaucer, 1896",
+    "kelmscott",
+    "30% 50%"
+   ],
+   [
+    "Type specimens",
+    66,
+    23,
+    "William Caslon, A Specimen, c. 1734",
+    "caslon",
+    "50% 0%"
+   ]
+  ],
+  "compat": [
+   [
+    "Bloomsbury Bookbinders",
+    "Strong",
+    "Kelmscott and fine-press bindings",
+    "kelmscott"
+   ],
+   [
+    "Camden Urban Sketchers",
+    "Unexpected",
+    "Draw in collections; follow Dürer closely",
+    "knight"
+   ],
+   [
+    "Natural History Illustrators",
+    "Partial",
+    "Engraved plates and Haeckel",
+    "trochilidae"
+   ]
+  ]
+ },
+ {
+  "id": "hokusai",
+  "ref": "Nº 0152",
+  "cat": "Print & Paper",
+  "city": "London, Deptford",
+  "unit": "day",
+  "layout": "bleed",
+  "lines": [
+   [
+    "Waves,",
+    0
+   ],
+   [
+    "after Hokusai",
+    1
+   ]
+  ],
+  "title": "Waves, after Hokusai",
+  "venue": "Kanda Mokuhanga Studio, Deptford",
+  "venueShort": "the studio",
+  "dek": "Cut and print a three-block wave in water-based Japanese woodblock.",
+  "format": "A full Saturday · cherry blocks and tools provided · up to 18 people · £38",
+  "short": "An ink-painting club and a sea-swimming club both save Hokusai’s waves far more often than similar groups. A day cutting one suits both.",
+  "why": "An unlikely pair. The Sumi Sunday Club paints with ink; the Greenwich Sea Swimmers swim in the Thames estuary all year. Both groups save Hokusai’s wave prints far more often than comparable communities do, and the Swimmers follow printmakers at three times the rate of other outdoor groups.",
+  "plan": [
+   [
+    "10:00",
+    "Introductions, tools and cutting the key block."
+   ],
+   [
+    "12:30",
+    "Lunch on the studio roof."
+   ],
+   [
+    "13:15",
+    "Colour blocks, printing in indigo and Prussian blue."
+   ],
+   [
+    "16:00",
+    "Everyone leaves with an edition of five."
+   ]
+  ],
+  "status": "proposed",
+  "needed": 16,
+  "capacity": 18,
+  "committed": 7,
+  "interested": 14,
+  "price": 38,
+  "dates": [
+   [
+    "2026-11-21",
+    "10:00–16:00",
+    9
+   ],
+   [
+    "2026-12-05",
+    "10:00–16:00",
+    12
+   ]
+  ],
+  "opened": "6 Oct",
+  "deadline": "7 Nov",
+  "subs": [
+   "Since 6 Oct · gathering commitments",
+   "At 16 commitments, the request goes to the studio",
+   "The studio confirms a date"
+  ],
+  "A": {
+   "name": "Sumi Sunday Club",
+   "short": "the Club",
+   "place": "Lewisham",
+   "members": 58,
+   "img": "redfuji",
+   "only": [
+    "Ink painting",
+    "Calligraphy brushes",
+    "Zen gardens"
+   ]
+  },
+  "B": {
+   "name": "Greenwich Sea Swimmers",
+   "short": "the Swimmers",
+   "place": "Greenwich",
+   "members": 210,
+   "img": "oceanwaves",
+   "only": [
+    "Tide tables",
+    "Cold-water swimming",
+    "Coastal walks"
+   ]
+  },
+  "shared": [
+   [
+    "Hokusai’s waves",
+    44,
+    38,
+    "Katsushika Hokusai, Thirty-six Views of Mount Fuji, c. 1830–32",
+    "wave",
+    "35% 40%"
+   ],
+   [
+    "Indigo and Prussian blue",
+    52,
+    21,
+    "Prussian blue pigment, widely used in Japanese prints from the late 1820s",
+    "oceanwaves",
+    "50% 50%"
+   ],
+   [
+    "Sea charts and coastlines",
+    18,
+    47,
+    "Inō Tadataka’s survey maps of the Japanese coast, 1800–1821",
+    null
+   ]
+  ],
+  "compat": [
+   [
+    "Deptford Printmakers",
+    "Strong",
+    "Relief printing and Japanese tools",
+    "redfuji"
+   ],
+   [
+    "Thames Sailing Club",
+    "Unexpected",
+    "Follows maritime prints",
+    "oceanwaves"
+   ]
+  ]
+ },
+ {
+  "id": "codex",
+  "ref": "Nº 0139",
+  "cat": "Manuscript",
+  "city": "Oxford",
+  "unit": "afternoon",
+  "layout": "art-right",
+  "lines": [
+   [
+    "Reading the",
+    0
+   ],
+   [
+    "Codex Mendoza",
+    1
+   ]
+  ],
+  "title": "Reading the Codex Mendoza",
+  "venue": "Ashgrove Library, Special Collections",
+  "venueShort": "the library",
+  "dek": "Page by page through a full-colour facsimile, with a reader of Nahua pictorial writing.",
+  "format": "Two and a half hours · seated · up to 24 people · £10",
+  "short": "A Latin American reading group and a map society both keep saving the Codex Mendoza’s founding page. Someone who can read its glyphs answers both groups’ questions.",
+  "why": "The Reading Group reads Mexican literature; the Map Room Society collects and walks old maps. Both keep saving the same image: the first page of the Codex Mendoza, where Tenochtitlan is drawn as an eagle on a cactus inside a quartered city.",
+  "plan": [
+   [
+    "14:00",
+    "Seminar room, with the facsimile on cradles."
+   ],
+   [
+    "14:15",
+    "Reading the founding page: glyphs, place names and the quartered city."
+   ],
+   [
+    "15:15",
+    "The tribute pages, and how they were annotated in Spanish."
+   ],
+   [
+    "16:00",
+    "Tea, and the library’s own early maps of Mexico City."
+   ]
+  ],
+  "status": "proposed",
+  "needed": 20,
+  "capacity": 24,
+  "committed": 9,
+  "interested": 6,
+  "price": 10,
+  "dates": [
+   [
+    "2026-11-14",
+    "14:00–16:30",
+    7
+   ],
+   [
+    "2026-11-21",
+    "14:00–16:30",
+    8
+   ]
+  ],
+  "opened": "1 Oct",
+  "deadline": "31 Oct",
+  "subs": [
+   "Since 1 Oct · gathering commitments",
+   "At 20 commitments, the request goes to the library",
+   "The library confirms a date"
+  ],
+  "A": {
+   "name": "Oxford Latin American Reading Group",
+   "short": "the Reading Group",
+   "place": "Oxford",
+   "members": 46,
+   "img": "borgia",
+   "only": [
+    "Contemporary Mexican fiction",
+    "Spanish-language poetry",
+    "Film nights"
+   ]
+  },
+  "B": {
+   "name": "The Map Room Society",
+   "short": "the Map Room",
+   "place": "Oxford",
+   "members": 88,
+   "img": "imola",
+   "only": [
+    "Ordnance Survey history",
+    "Portolan charts",
+    "Long-distance walking"
+   ]
+  },
+  "shared": [
+   [
+    "Pictorial maps",
+    31,
+    66,
+    "Codex Mendoza, folio 2r, c. 1541",
+    "mendoza",
+    "50% 40%"
+   ],
+   [
+    "Mesoamerican codices",
+    48,
+    22,
+    "Codex Borgia, before 1500",
+    "borgia",
+    "50% 35%"
+   ],
+   [
+    "City plans",
+    22,
+    71,
+    "Leonardo da Vinci, Plan of Imola, 1502",
+    "imola",
+    "50% 50%"
+   ]
+  ],
+  "compat": [
+   [
+    "Oxford Nahuatl Circle",
+    "Strong",
+    "Studies Classical Nahuatl texts",
+    "borgia"
+   ],
+   [
+    "Cowley Road Zine Library",
+    "Partial",
+    "Collects hand-drawn maps",
+    "imola"
+   ]
+  ]
+ },
+ {
+  "id": "wayang",
+  "ref": "Nº 0118",
+  "cat": "Performance",
+  "city": "Leeds",
+  "unit": "night",
+  "layout": "art-right",
+  "lines": [
+   [
+    "Shadow",
+    0
+   ],
+   [
+    "& Lamp",
+    1
+   ]
+  ],
+  "title": "Shadow & Lamp",
+  "venue": "Holbeck Hall, Leeds",
+  "venueShort": "Holbeck Hall",
+  "dek": "An all-night wayang kulit with a visiting dalang and the Leeds gamelan.",
+  "format": "Five and a half hours · chairs or cushions behind the screen · up to 60 people · £12",
+  "short": "A gamelan that rarely plays for wayang and a puppetry guild that has rarely seen it performed. Together they made a dalang’s journey north worthwhile.",
+  "why": "Gamelan Sekar plays the music that accompanies wayang but has rarely played for a full performance. The Northern Puppetry Guild builds puppets but few of its members have seen wayang kulit live. A visiting dalang needed thirty committed places to make the journey north. The two groups passed that in September and Holbeck Hall confirmed the night.",
+  "plan": [
+   [
+    "19:00",
+    "Doors. Chairs in front of the screen, or cushions behind it with the dalang."
+   ],
+   [
+    "19:30",
+    "The performance begins, with the gamelan."
+   ],
+   [
+    "22:30",
+    "An interval, with Javanese food."
+   ],
+   [
+    "00:30",
+    "The story ends."
+   ]
+  ],
+  "status": "confirmed",
+  "needed": 30,
+  "capacity": 60,
+  "committed": 41,
+  "interested": 12,
+  "price": 12,
+  "dates": [
+   [
+    "2026-11-07",
+    "19:00–00:30",
+    41
+   ]
+  ],
+  "opened": "3 Sep",
+  "deadline": null,
+  "subs": [
+   "3 Sep · suggested by sila",
+   "19 Sep · 30 commitments reached",
+   "2 Oct · confirmed by Holbeck Hall"
+  ],
+  "A": {
+   "name": "Gamelan Sekar Leeds",
+   "short": "the gamelan",
+   "place": "Leeds",
+   "members": 34,
+   "img": "wayang2",
+   "only": [
+    "Javanese court music",
+    "Minimalist composition",
+    "Bell-ringing"
+   ]
+  },
+  "B": {
+   "name": "Northern Puppetry Guild",
+   "short": "the Guild",
+   "place": "Leeds and Bradford",
+   "members": 120,
+   "img": "wayang",
+   "only": [
+    "Marionettes",
+    "Toy theatre",
+    "Mask making"
+   ]
+  },
+  "shared": [
+   [
+    "Shadow theatre",
+    41,
+    72,
+    "Wayang puppet theatre, UNESCO Intangible Cultural Heritage",
+    "wayang",
+    "50% 30%"
+   ],
+   [
+    "Javanese gamelan",
+    88,
+    19,
+    "Gamelan, inscribed by UNESCO in 2021",
+    null
+   ],
+   [
+    "Epic cycles",
+    27,
+    35,
+    "The Mahabharata and Ramayana, as told by the dalang",
+    "wayang2",
+    "50% 50%"
+   ]
+  ],
+  "compat": [
+   [
+    "Leeds Indonesian Society",
+    "Strong",
+    "Javanese and Balinese culture",
+    "wayang2"
+   ],
+   [
+    "Yorkshire Storytellers",
+    "Unexpected",
+    "Long-form oral epics",
+    "wayang"
+   ]
+  ]
+ },
+ {
+  "id": "kente",
+  "ref": "Nº 0144",
+  "cat": "Textile",
+  "city": "London, Walthamstow",
+  "unit": "day",
+  "layout": "art-left",
+  "lines": [
+   [
+    "Kente,",
+    0
+   ],
+   [
+    "thread by thread",
+    1
+   ]
+  ],
+  "title": "Kente, thread by thread",
+  "venue": "The Lea Weaving Workshop, Walthamstow",
+  "venueShort": "the Lea Workshop",
+  "dek": "A weaver from Bonwire demonstrates narrow-strip weaving, then hands the looms over.",
+  "format": "A full day · looms shared in pairs · up to 28 people · £16",
+  "short": "The Collective wears kente but few members have woven it; the Weavers have looms and want to learn strip weaving. A master weaver is in London for one week.",
+  "why": "The Accra–London Textile Collective wears kente to weddings and naming ceremonies, but few members have woven it. The Weavers of the Lea own floor looms and want to try narrow-strip work. A master weaver from Bonwire is in London for one week in November. The two groups passed the minimum of 24 on 9 October, and the request is now with the Lea Workshop.",
+  "plan": [
+   [
+    "11:00",
+    "Welcome, and the cloths the Collective has brought from home."
+   ],
+   [
+    "11:30",
+    "Demonstration on a narrow strip loom."
+   ],
+   [
+    "13:00",
+    "Lunch."
+   ],
+   [
+    "14:00",
+    "Hands on the Weavers’ looms, in pairs."
+   ]
+  ],
+  "status": "awaiting",
+  "needed": 24,
+  "capacity": 28,
+  "committed": 25,
+  "interested": 10,
+  "price": 16,
+  "dates": [
+   [
+    "2026-11-14",
+    "11:00–16:00",
+    13
+   ],
+   [
+    "2026-11-15",
+    "11:00–16:00",
+    12
+   ]
+  ],
+  "opened": "28 Sep",
+  "deadline": "30 Oct",
+  "subs": [
+   "28 Sep · suggested by sila",
+   "9 Oct · minimum reached, sent to the Lea Workshop",
+   "Decision expected by 30 Oct"
+  ],
+  "A": {
+   "name": "Accra–London Textile Collective",
+   "short": "the Collective",
+   "place": "Peckham",
+   "members": 76,
+   "img": "kentedetail",
+   "only": [
+    "Adinkra printing",
+    "Wax-print fashion",
+    "Highlife"
+   ]
+  },
+  "B": {
+   "name": "Weavers of the Lea",
+   "short": "the Weavers",
+   "place": "Walthamstow",
+   "members": 52,
+   "img": "strawberry",
+   "only": [
+    "William Morris",
+    "Tapestry",
+    "Spinning"
+   ]
+  },
+  "shared": [
+   [
+    "Narrow-strip weaving",
+    61,
+    58,
+    "Asante kente, woven in strips about four inches wide",
+    "kentedetail",
+    "50% 50%"
+   ],
+   [
+    "Pattern names and proverbs",
+    73,
+    24,
+    "Named kente patterns and the sayings attached to them",
+    null
+   ],
+   [
+    "Natural dyes",
+    22,
+    49,
+    "Palampore, India, c. 1815: mordant- and resist-dyed cotton",
+    "palampore",
+    "60% 50%"
+   ]
+  ],
+  "compat": [
+   [
+    "Bethnal Green Quilters",
+    "Partial",
+    "Strip piecing and colour work",
+    "palampore"
+   ],
+   [
+    "Ghana Union UK",
+    "Strong",
+    "Asante heritage events",
+    "kentedetail"
+   ]
+  ]
+ },
+ {
+  "id": "haeckel",
+  "ref": "Nº 0156",
+  "cat": "Natural History",
+  "city": "London, South Kensington",
+  "unit": "evening",
+  "layout": "art-right",
+  "lines": [
+   [
+    "Radiolaria",
+    0
+   ],
+   [
+    "& Ink",
+    1
+   ]
+  ],
+  "title": "Radiolaria & Ink",
+  "venue": "Marlow Natural History Library",
+  "venueShort": "the library",
+  "dek": "Draw from Haeckel’s plates, with marine biologists on hand to name what you are drawing.",
+  "format": "Two hours · drawing materials provided · up to 24 people · £9",
+  "short": "Sketchers draw Haeckel for the line; marine biologists study the animals he drew. One evening at the plates serves both.",
+  "why": "The Camden Urban Sketchers draw what they find in London’s collections. The UCL Marine Biology Alumni study the animals Haeckel drew. Both groups follow Kunstformen der Natur closely, from opposite ends: one for the drawing, one for the animals.",
+  "plan": [
+   [
+    "18:00",
+    "The plates are set out on the long table."
+   ],
+   [
+    "18:20",
+    "A short introduction to what each animal is."
+   ],
+   [
+    "18:40",
+    "Drawing, with the librarian and biologists moving between tables."
+   ],
+   [
+    "20:00",
+    "Close."
+   ]
+  ],
+  "status": "proposed",
+  "needed": 18,
+  "capacity": 24,
+  "committed": 5,
+  "interested": 17,
+  "price": 9,
+  "dates": [
+   [
+    "2026-11-18",
+    "18:00–20:00",
+    10
+   ],
+   [
+    "2026-11-25",
+    "18:00–20:00",
+    7
+   ]
+  ],
+  "opened": "8 Oct",
+  "deadline": "6 Nov",
+  "subs": [
+   "Since 8 Oct · gathering commitments",
+   "At 18 commitments, the request goes to the library",
+   "The library confirms a date"
+  ],
+  "A": {
+   "name": "Camden Urban Sketchers",
+   "short": "the Sketchers",
+   "place": "Camden",
+   "members": 180,
+   "img": "trochilidae",
+   "only": [
+    "Drawing on location",
+    "Fountain pens",
+    "Architecture"
+   ]
+  },
+  "B": {
+   "name": "UCL Marine Biology Alumni",
+   "short": "the Alumni",
+   "place": "London",
+   "members": 95,
+   "img": "actiniae",
+   "only": [
+    "Plankton",
+    "Reef conservation",
+    "Research diving"
+   ]
+  },
+  "shared": [
+   [
+    "Haeckel’s plates",
+    57,
+    62,
+    "Ernst Haeckel, Kunstformen der Natur, 1899–1904",
+    "actiniae",
+    "50% 50%"
+   ],
+   [
+    "Nature studies",
+    49,
+    44,
+    "Albrecht Dürer, Young Hare, 1502",
+    "hare",
+    "50% 45%"
+   ],
+   [
+    "Microscopy",
+    12,
+    81,
+    "Radiolaria drawn from the Challenger expedition’s samples",
+    null
+   ]
+  ],
+  "compat": [
+   [
+    "Natural History Illustrators",
+    "Strong",
+    "Botanical and zoological drawing",
+    "orchidae"
+   ],
+   [
+    "South Ken Life Drawing",
+    "Partial",
+    "Draws in museum galleries",
+    "hare"
+   ]
+  ]
+ },
+ {
+  "id": "hamza",
+  "ref": "Nº 0161",
+  "cat": "Performance",
+  "city": "London, Whitechapel",
+  "unit": "evening",
+  "layout": "art-left",
+  "lines": [
+   [
+    "The Adventures",
+    0
+   ],
+   [
+    "of Hamza,",
+    0
+   ],
+   [
+    "told aloud",
+    1
+   ]
+  ],
+  "title": "The Adventures of Hamza, told aloud",
+  "venue": "Fieldgate Street Library Hall",
+  "venueShort": "the library hall",
+  "dek": "Dastangoi: two storytellers perform episodes of the Hamza epic in Urdu and English.",
+  "format": "Two hours · paintings projected behind the storytellers · up to 60 people · £8",
+  "short": "An Urdu poetry society and a graphic-novel club both save the Hamzanama’s paintings. Hearing the epic told aloud brings the pictures and the words back together.",
+  "why": "The Mushaira Society of East London meets for Urdu poetry; the Whitechapel Graphic Novel Club reads comics and serial adventures. Both have been saving the same paintings: folios from the Hamzanama, the enormous illustrated Hamza epic made for the emperor Akbar. Two dastangos touring the UK in November need an audience of twenty.",
+  "plan": [
+   [
+    "19:30",
+    "Doors, and chai."
+   ],
+   [
+    "20:00",
+    "Two episodes of the Hamza epic, in Urdu with English interludes."
+   ],
+   [
+    "21:00",
+    "The storytellers take questions; the paintings stay on screen."
+   ],
+   [
+    "21:30",
+    "Close."
+   ]
+  ],
+  "status": "proposed",
+  "needed": 20,
+  "capacity": 60,
+  "committed": 14,
+  "interested": 9,
+  "price": 8,
+  "dates": [
+   [
+    "2026-11-20",
+    "19:30–21:30",
+    9
+   ],
+   [
+    "2026-11-27",
+    "19:30–21:30",
+    11
+   ]
+  ],
+  "opened": "10 Oct",
+  "deadline": "6 Nov",
+  "subs": [
+   "Since 10 Oct · gathering commitments",
+   "At 20 commitments, the request goes to the hall",
+   "The hall confirms a date"
+  ],
+  "A": {
+   "name": "Mushaira Society of East London",
+   "short": "the Mushaira",
+   "place": "Whitechapel",
+   "members": 64,
+   "img": "hamza",
+   "only": [
+    "Ghazal",
+    "Faiz and Ghalib",
+    "Qawwali"
+   ]
+  },
+  "B": {
+   "name": "Whitechapel Graphic Novel Club",
+   "short": "the Club",
+   "place": "Whitechapel",
+   "members": 130,
+   "img": "wave",
+   "only": [
+    "Manga",
+    "Small-press comics",
+    "Zine fairs"
+   ]
+  },
+  "shared": [
+   [
+    "The Hamzanama paintings",
+    62,
+    48,
+    "Folios from the Hamzanama, Mughal, c. 1562–77",
+    "hamza",
+    "50% 50%"
+   ],
+   [
+    "Serial adventures",
+    41,
+    77,
+    "The Hamza epic was traditionally told in nightly instalments",
+    null
+   ],
+   [
+    "Urdu storytelling",
+    83,
+    26,
+    "Dastangoi, revived as a performance form in Delhi in 2005",
+    null
+   ]
+  ],
+  "compat": [
+   [
+    "SOAS Urdu Alumni",
+    "Strong",
+    "Urdu literature and performance",
+    "hamza"
+   ],
+   [
+    "East London Comics Collective",
+    "Partial",
+    "Visual storytelling",
+    "wave"
+   ]
+  ]
+ }
+]

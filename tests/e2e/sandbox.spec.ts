@@ -32,7 +32,7 @@ async function draftAndPublish(page: Page): Promise<string> {
   await expect(page.getByRole("heading", { name: "Options to compare" })).toBeVisible({ timeout: 20_000 });
   await expect(page.getByText("Synthetic evidence (illustrative, not from Qloo)")).toBeVisible();
   await page.getByRole("link", { name: "Inspect reasons and send for venue review" }).first().click();
-  await expect(page.getByRole("heading", { name: "Why this option" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Why it was suggested" })).toBeVisible();
   await expectNoHorizontalScroll(page);
   const proposalUrl = new URL(page.url()).pathname;
 
@@ -64,13 +64,18 @@ test("organiser to venue confirmation, with an individual participant seat", asy
   await actAs(page, "Bram (book club)");
   await page.goto(proposalUrl);
   await expect(page.getByText("No payment is collected here.").first()).toBeVisible();
+  await page.getByRole("link", { name: /^Commit a place ·/ }).click();
+  await expect(page.getByRole("heading", { name: "Commit to a place" })).toBeVisible();
+  await expectNoHorizontalScroll(page);
   await page.getByLabel("I confirm I am an adult (18 or over).").check();
   await page.getByLabel(/I understand this session is shared/).check();
-  await page.getByRole("button", { name: "Reserve one seat" }).click();
+  await page.getByRole("button", { name: "Commit my place" }).click();
   await expect(page.getByRole("status")).toContainText("One seat reserved");
-  await expect(page.getByRole("button", { name: "Withdraw my seat" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /is yours/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Withdraw my commitment" })).toBeVisible();
 
   // Others reserve up to the threshold through the same guarded rules.
+  await page.goto(proposalUrl);
   await page.getByRole("button", { name: /Simulate other members reserving/ }).click();
   await expect(page.getByText("Ready for venue confirmation").first()).toBeVisible();
 
@@ -153,4 +158,23 @@ test("an organiser edits the brief, sees field errors, and lookups degrade hones
   await page.getByRole("link", { name: "Look up in Qloo" }).first().click();
   // Without a configured key the reference stays unlinked; nothing is guessed.
   await expect(page.getByRole("status")).toContainText(/not configured|no entity is guessed/);
+});
+
+test("demo showcase: a demonstration commitment stays in the browser", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("region", { name: "Experiences forming" }).getByText("Demo data").first()).toBeVisible();
+  await page.goto("/showcase/print-room");
+  await expect(page.getByRole("note")).toContainText("Demo data");
+  await page.getByRole("link", { name: /^Commit a place/ }).click();
+  await expect(page.getByRole("heading", { name: "Commit to a place" })).toBeVisible();
+  const submit = page.getByRole("button", { name: "Commit my place" });
+  await expect(submit).toBeDisabled();
+  await page.getByLabel(/I understand this holds a place/).check();
+  await submit.click();
+  await expect(page.getByRole("heading", { name: /is yours/ })).toBeVisible();
+  await expect(page.getByText("Demonstration: no payment · no reservation").or(page.getByLabel("Demonstration only"))).toBeVisible();
+  await expectNoHorizontalScroll(page);
+  await page.getByRole("button", { name: "Withdraw my commitment" }).click();
+  await expect(page).toHaveURL(/\/showcase\/print-room$/);
+  await expect(page.getByRole("link", { name: /^Commit a place/ })).toBeVisible();
 });
