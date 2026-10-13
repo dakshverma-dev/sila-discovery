@@ -19,3 +19,5 @@ Q03,Open question,What are live search and optional affinity-field response path
 Q04,Open question,Which Edinburgh venue and three groups agree to the first pilot?,High,Product owner,Obtain explicit participation; do not imply a partnership.
 Q05,Open question,"What controller roles, lawful bases and retention periods are appropriate?",High,Product owner,Review vendor terms and pilot processing before real personal data.
 Q06,Open question,Can venue programme anchors meaningfully represent the experience?,High,Curatorial reviewer,Review mapping reasons and compare with unassisted recommendations.
+RISK11,Risk,"Qloo /search envelope and the Insights affinity field path (query.affinity) are provisional parser assumptions not yet observed live.",Medium,Engineer,Run a private redacted live contract test with the issued key before relying on raw scores or search parsing.
+RISK12,Risk,"npm audit reports a high-severity braces/micromatch advisory reached only through eslint-config-next dev tooling; not in the runtime bundle.",Low,Engineer,Re-check on the next eslint-config-next release; do not downgrade to resolve.
