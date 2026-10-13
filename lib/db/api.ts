@@ -33,9 +33,33 @@ const FUNCTIONS = [
   "complete_proposal",
   "create_demo_workspace",
   "list_demo_personas",
+  "create_match_run",
+  "lease_match_run",
+  "checkpoint_match_run",
+  "finish_match_run",
+  "record_evidence",
+  "get_match_run",
+  "list_recoverable_match_runs",
+  "request_venue_review",
 ] as const;
 
 export type ApiFunction = (typeof FUNCTIONS)[number];
+
+/** Marks a value (typically an array) to be sent as jsonb rather than a SQL array. */
+export class JsonParam {
+  constructor(readonly value: unknown) {}
+}
+
+export function json(value: unknown): JsonParam {
+  return new JsonParam(value);
+}
+
+function toParam(a: unknown): unknown {
+  if (a instanceof JsonParam) return JSON.stringify(a.value);
+  // Plain objects are jsonb; arrays stay SQL arrays (uuid[], text[]).
+  if (a !== null && typeof a === "object" && !Array.isArray(a) && !(a instanceof Date)) return JSON.stringify(a);
+  return a;
+}
 
 /** Calls a guarded function with positional parameters and returns its envelope. */
 export async function callApi<T>(
@@ -47,7 +71,7 @@ export async function callApi<T>(
   const placeholders = args.map((_, i) => `$${i + 1}`).join(", ");
   const { rows } = await pool.query<{ result: ApiResult<T> }>(
     `select scb_api.${fn}(${placeholders}) as result`,
-    args.map((a) => (a !== null && typeof a === "object" && !Array.isArray(a) ? JSON.stringify(a) : a)),
+    args.map(toParam),
   );
   const result = rows[0]?.result;
   if (!result || typeof result !== "object" || !("ok" in result)) {

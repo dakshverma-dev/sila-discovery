@@ -12,6 +12,8 @@ export interface SolverInput {
   /** Ordered provider results per group; a missing entry means no evidence. */
   rankings: Readonly<Record<string, readonly RankedAnchor[] | undefined>>;
   source_mode: SourceMode;
+  /** When set, only coalitions that include this group are suggested. */
+  must_include_group_id?: string;
 }
 
 export interface Candidate {
@@ -180,6 +182,9 @@ export function solve(input: SolverInput): SolverResult {
       const maxSize = Math.min(LIMITS.coalitionMax, eligible.length);
       for (let size = LIMITS.coalitionMin; size <= maxSize; size++) {
         for (const coalition of subsets(eligible, size)) {
+          if (input.must_include_group_id && !coalition.some((g) => g.group_id === input.must_include_group_id)) {
+            continue;
+          }
           const seats = coalition.reduce((sum, g) => sum + g.expected_seats, 0);
           if (seats < required) {
             belowRequired++;

@@ -161,3 +161,20 @@ describe("coalition solver (D13, BR03-BR06)", () => {
     expect(r.candidates[0]!.group_ids).toEqual(["group_a", "group_b"]);
   });
 });
+
+describe("organiser-scoped runs", () => {
+  it("only returns coalitions that include the requesting group", () => {
+    const input = fixture();
+    const wide = [{ start_at: "2026-12-01T00:00:00Z", end_at: "2026-12-31T00:00:00Z" }];
+    const groups = [
+      ...input.groups.map((g) => ({ ...g, availability: wide, expected_seats: 12 })),
+      { ...input.groups[1]!, group_id: "group_d", availability: wide, expected_seats: 12 },
+    ];
+    const rankings = { ...input.rankings, group_d: input.rankings.group_b };
+    const all = solve({ ...input, groups, rankings });
+    const scoped = solve({ ...input, groups, rankings, must_include_group_id: "group_c" });
+    expect(all.candidates.some((c) => !c.group_ids.includes("group_c"))).toBe(true);
+    expect(scoped.candidates.length).toBeGreaterThan(0);
+    expect(scoped.candidates.every((c) => c.group_ids.includes("group_c"))).toBe(true);
+  });
+});
