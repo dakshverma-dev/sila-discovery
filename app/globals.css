@@ -147,3 +147,58 @@ dl.terms dd {
     transition: none !important;
   }
 }
+
+.plain-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.scenario-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+}
+
+.scenario-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius);
+  background: var(--colour-surface);
+  color: var(--colour-text);
+  text-decoration: none;
+}
+
+.scenario-link[aria-current="page"] {
+  background: var(--colour-primary);
+  border-color: var(--colour-primary);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+details > summary {
+  cursor: pointer;
+  min-height: var(--target);
+  display: flex;
+  align-items: center;
+  color: var(--colour-primary);
+  font-weight: 600;
+}
+
+.details-body {
+  padding-top: var(--space-2);
+}

@@ -18,6 +18,7 @@ export interface Candidate {
   experience_id: string;
   slot_id: string;
   slot_start_at: string;
+  slot_end_at: string;
   group_ids: string[];
   required_seats: number;
   planned_seats: number;
@@ -202,6 +203,7 @@ export function solve(input: SolverInput): SolverResult {
             experience_id: experience.id,
             slot_id: slot.id,
             slot_start_at: slot.start_at,
+            slot_end_at: slot.end_at,
             group_ids: coalition.map((g) => g.group_id).sort(),
             required_seats: required,
             planned_seats: seats,
