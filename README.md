@@ -1,0 +1,31 @@
+# Shared Cultural Bookings documentation pack
+
+Version 0.1, 12 October 2026. Proposed implementation baseline.
+
+## What is included
+All 28 requested items are present. Items 1-24 and 26-28 have editable Word and Markdown versions; item 25 is root agents.md. Start with 00_Documentation_Index.docx or specs/document_index.json.
+
+## Product boundary
+One initial Edinburgh exchange; venue-approved programmes; GBP; adult groups; one seat per participant; two-to-four-group coalitions; reservations with payment_status=NOT_COLLECTED. Venue confirmation is approval of a reservation booking, not payment settlement. Voice and automatic external outreach are later work.
+
+## Reference assets
+- specs/openapi.yaml: proposed application HTTP contracts.
+- specs/schema.sql: fail-closed SQL design reference, not a deploy-ready migration.
+- specs/matching_reference.py and test_matching_reference.py: deterministic synthetic reference checks.
+- specs/synthetic_fixture.json: fictional groups and quote; no invented Qloo entity IDs.
+- specs/config.json, design_tokens.json, requirements.json, traceability.csv, risks.csv, decisions.csv.
+- diagrams/: Mermaid, SVG and PNG workflows; editable topology in .mmd sources.
+- specs/.env.example: blank secret configuration template.
+
+## Source and precedence
+The product brief in this conversation is the product basis. D14 owns business invariants; D16 and openapi.yaml own application interfaces; D11 owns upstream Qloo integration; D15 and schema.sql own the relational design. If these conflict, pause implementation and reconcile the contract. Defaults are proposed decisions; D27 lists validation gaps.
+
+## Validation and remaining work
+The reference module has six executable synthetic checks. That is not application QA or real demand validation. The pack records document and contract consistency checks in specs/validation_report.json. No app is deployed and no live API call, customer booking or payment was made by this task.
+Implement guarded database functions, column-safe permissions and migrations before using schema.sql with real users. Complete a private live Qloo parser/coverage test with the issued key. Source responses and keys must stay out of public Git.
+
+## Deadline
+Official deadline: 31 October 2026 03:45 Europe/London, equivalent to 30 October 23:45 EDT and 31 October 09:15 Asia/Kolkata. Internal target: 29 October 18:00 UK. Recheck qloo.devpost.com before submission.
+
+## Repository instruction filename
+The requested filename is agents.md. If the implementation environment automatically loads only AGENTS.md, copy the content to that filename when integrating this pack into the repository.

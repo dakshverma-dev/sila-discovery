@@ -1,0 +1,15 @@
+{
+  "colour.text": "#1C2421",
+  "colour.canvas": "#FAF9F6",
+  "colour.surface": "#FFFFFF",
+  "colour.primary": "#245A45",
+  "colour.muted": "#58635D",
+  "colour.border": "#D5DBD6",
+  "colour.danger": "#A52424",
+  "colour.warning": "#7A4A00",
+  "type.body": "16px / 1.5",
+  "type.heading": "24 to 36px / 1.2",
+  "space.scale": "4 8 12 16 24 32 48px",
+  "radius": "8px",
+  "target": "44 by 44px preferred"
+}

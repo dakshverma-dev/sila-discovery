@@ -1,0 +1,10 @@
+flowchart TD
+ UI["Next.js client"] --> API["Authenticated application API"]
+ API --> DB["PostgreSQL guarded transactions"]
+ API --> JOB["Durable job and Edge worker"]
+ JOB --> Q["Qloo adapter"]
+ JOB --> L["Optional LLM adapter"]
+ JOB --> SOLVE["Deterministic solver"]
+ SOLVE --> DB
+ CRON["Supabase Cron"] --> DB
+ CRON --> JOB

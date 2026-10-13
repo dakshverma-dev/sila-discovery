@@ -1,0 +1,11 @@
+Decision,Area,Proposed default
+DEC01,MVP boundary,One Edinburgh pilot workspace; existing venue programmes; GBP only; adult participants; one seat per reservation.
+DEC02,Payment meaning,"MVP records reservations and quoted economics. No card collection, escrow, refunds or paid-demand claims. CONFIRMED means venue-approved reservation booking."
+DEC03,Human authority,Only a venue manager publishes terms and confirms bookings. Organisers approve group participation. The AI cannot bypass these actions.
+DEC04,Qloo environment,Hackathon base is https://hackathon.api.qloo.com; use GET /search and GET /v2/insights with X-Api-Key. No invented entity IDs.
+DEC05,Hard constraints,"Cost, time, capacity, explicit sharing consent, access support and venue deliverability are checked before taste ranking."
+DEC06,Revision control,Material changes require a new proposal version and fresh group decisions and participant reservations.
+DEC07,Deployment,Next.js and TypeScript on Vercel; Supabase Auth and PostgreSQL; bounded job worker on Supabase Edge Functions; pg_cron recovery.
+DEC08,AI role,"An optional configured LLM extracts briefs and drafts explanations; deterministic code computes feasibility, pricing, lifecycle and access."
+DEC09,Data rights,Private server-side Qloo caching is permitted by the hackathon guide. Raw provider responses stay out of public source control and demo exports.
+DEC10,Evidence status,"No customer interviews, paid pilot, live API call or deployed application has been completed by this documentation task."

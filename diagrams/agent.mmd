@@ -1,0 +1,9 @@
+flowchart TD
+ A["Lease and freeze inputs"] --> B{"Inputs complete and consented?"}
+ B -->|No| N["NEEDS_INPUT"]
+ B -->|Yes| Q["Query Qloo within budget"]
+ Q --> S["Run deterministic solver"]
+ S --> V{"Evidence and constraints valid?"}
+ V -->|No| E["Explain blockers or failure"]
+ V -->|Yes| D["Save grounded DRAFT"]
+ D --> H["Human publication boundary"]

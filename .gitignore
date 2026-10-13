@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# build output
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# environment and secrets
+.env
+.env.*
+!.env.example
+!specs/.env.example
+
+# provider payloads must never be committed (D11, D19)
+qloo-dumps/
+*.qloo.json
+
+# tooling
+.vercel/
+.supabase/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.claude/settings.local.json

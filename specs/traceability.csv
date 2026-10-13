@@ -1,0 +1,29 @@
+Requirement,Title,Test,Primary document
+R01,Identity and access,T01,D03
+R02,Approved catalogue,T02,D03
+R03,Group brief,T03,D03
+R04,Entity resolution,T04,D03
+R05,Qloo discovery,T05,D03
+R06,Interpretation and mapping,T06,D03
+R07,Coalition formation,T07,D03
+R08,Explanations,T08,D03
+R09,Versioned proposals,T09,D03
+R10,Group decisions,T10,D03
+R11,Reservations,T11,D03
+R12,Venue confirmation,T12,D03
+R13,Lifecycle recovery,T13,D03
+R14,Agent job visibility,T14,D03
+R15,Public judge sandbox,T15,D03
+R16,Privacy controls,T16,D03
+R17,Evaluation evidence,T17,D03
+R18,Operator control,T18,D03
+N01,Authorisation,T01,D04
+N02,Transaction integrity,T11,D04
+N03,Performance,T19,D04
+N04,Accessibility,T20,D04
+N05,Recovery,T14,D04
+N06,Provenance,T08,D04
+N07,Privacy,T16,D04
+N08,Operability,T21,D04
+N09,Reproducibility,T22,D04
+N10,Availability,T23,D04

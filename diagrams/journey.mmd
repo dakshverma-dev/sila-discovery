@@ -1,0 +1,10 @@
+flowchart TD
+ A["Group brief and consent"] --> B["Qloo evidence and feasible candidates"]
+ B --> C["Venue reviews and publishes"]
+ C --> D{"Groups accept current terms?"}
+ D -->|No| R["New draft or no agreement"]
+ R --> B
+ D -->|Yes| E["Members reserve seats"]
+ E --> F{"Threshold reached?"}
+ F -->|No| W["Wait or expire"]
+ F -->|Yes| G["Venue confirms reservation booking"]

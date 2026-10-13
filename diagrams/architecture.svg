@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="790" viewBox="0 0 1280 790">
+<rect width="100%" height="100%" fill="white"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#44564b"/></marker></defs>
+<path d="M 390 97.5 L 470 97.5" fill="none" stroke="#44564b" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M 630.0 160 L 630.0 300" fill="none" stroke="#44564b" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="638.0" y="221.0" text-anchor="start" fill="#253a2e" font-size="18" font-family="sans-serif">Booking writes</text>
+<path d="M630 160 L630 230 L1030 230 L1030 300" fill="none" stroke="#44564b" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="925" y="215" text-anchor="middle" fill="#253a2e" font-size="18" font-family="sans-serif">Matching job</text>
+<path d="M 1030.0 425 L 1030.0 540" fill="none" stroke="#44564b" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="1038.0" y="473.5" text-anchor="start" fill="#253a2e" font-size="18" font-family="sans-serif">Cultural IDs</text>
+<path d="M1190 370 L1220 370 L1220 720 L230 720 L230 665" fill="none" stroke="#44564b" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="710" y="710" text-anchor="middle" fill="#253a2e" font-size="18" font-family="sans-serif">Draft wording</text>
+<path d="M 1030.0 425 L 1030.0 482.5 L 630.0 482.5 L 630.0 540" fill="none" stroke="#44564b" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="830.0" y="472.5" text-anchor="middle" fill="#253a2e" font-size="18" font-family="sans-serif">Evidence</text>
+<path d="M 630.0 540 L 630.0 425" fill="none" stroke="#44564b" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="638.0" y="473.5" text-anchor="start" fill="#253a2e" font-size="18" font-family="sans-serif">Drafts only</text>
+<path d="M390 362 L470 362" fill="none" stroke="#44564b" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="430" y="349" text-anchor="middle" fill="#253a2e" font-size="18" font-family="sans-serif">Expiry</text>
+<path d="M230 300 L230 270 L1030 270 L1030 300" fill="none" stroke="#44564b" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="880" y="260" text-anchor="middle" fill="#253a2e" font-size="18" font-family="sans-serif">Recovery</text>
+<rect x="70" y="35" width="320" height="125" rx="9" fill="#f1f5f1" stroke="#5d7565" stroke-width="2"/>
+<text x="230" y="97" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">Next.js client</text>
+<rect x="470" y="35" width="320" height="125" rx="9" fill="#f1f5f1" stroke="#5d7565" stroke-width="2"/>
+<text x="630" y="83" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">Authenticated application</text>
+<text x="630" y="111" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">API</text>
+<rect x="470" y="300" width="320" height="125" rx="9" fill="#f1f5f1" stroke="#5d7565" stroke-width="2"/>
+<text x="630" y="348" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">PostgreSQL guarded</text>
+<text x="630" y="376" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">transactions</text>
+<rect x="870" y="300" width="320" height="125" rx="9" fill="#f1f5f1" stroke="#5d7565" stroke-width="2"/>
+<text x="1030" y="348" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">Durable job and Edge</text>
+<text x="1030" y="376" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">worker</text>
+<rect x="870" y="540" width="320" height="125" rx="9" fill="#f1f5f1" stroke="#5d7565" stroke-width="2"/>
+<text x="1030" y="602" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">Qloo adapter</text>
+<rect x="70" y="540" width="320" height="125" rx="9" fill="#f1f5f1" stroke="#5d7565" stroke-width="2"/>
+<text x="230" y="602" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">Optional LLM adapter</text>
+<rect x="470" y="540" width="320" height="125" rx="9" fill="#f1f5f1" stroke="#5d7565" stroke-width="2"/>
+<text x="630" y="602" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">Deterministic solver</text>
+<rect x="70" y="300" width="320" height="125" rx="9" fill="#f1f5f1" stroke="#5d7565" stroke-width="2"/>
+<text x="230" y="348" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">Supabase Cron expiry and</text>
+<text x="230" y="376" text-anchor="middle" fill="#172b1e" font-family="sans-serif" font-size="23">recovery</text>
+</svg>

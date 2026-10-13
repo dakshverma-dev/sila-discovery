@@ -1,0 +1,109 @@
+{
+  "status": "synthetic_design_fixture_not_customer_evidence",
+  "source_mode": "synthetic",
+  "experience": {
+    "id": "programme_1",
+    "title": "Illustrative specialist cultural session",
+    "anchor_labels": [
+      "anchor_a",
+      "anchor_b"
+    ],
+    "qloo_entity_ids": [],
+    "access_support": [
+      "step_free",
+      "seating"
+    ]
+  },
+  "slot": {
+    "id": "slot_1",
+    "start_at": "2026-12-05T14:00:00Z",
+    "end_at": "2026-12-05T15:30:00Z",
+    "capacity": 30
+  },
+  "quote": {
+    "fixed_pence": 30000,
+    "variable_pence": 500,
+    "minimum_venue_charge_pence": 0,
+    "platform_fee_pence": 200,
+    "ticket_pence": 2000,
+    "venue_min_seats": 10
+  },
+  "groups": [
+    {
+      "id": "group_a",
+      "name": "Illustrative book club",
+      "expected_seats": 8,
+      "budget_pence": 2200,
+      "sharing_consent": true,
+      "access_requirements": [
+        "seating"
+      ],
+      "availability": [
+        {
+          "start_at": "2026-12-05T13:00:00Z",
+          "end_at": "2026-12-05T17:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "group_b",
+      "name": "Illustrative film society",
+      "expected_seats": 10,
+      "budget_pence": 2000,
+      "sharing_consent": true,
+      "access_requirements": [],
+      "availability": [
+        {
+          "start_at": "2026-12-05T14:00:00Z",
+          "end_at": "2026-12-05T16:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "group_c",
+      "name": "Illustrative makers group",
+      "expected_seats": 7,
+      "budget_pence": 2500,
+      "sharing_consent": true,
+      "access_requirements": [
+        "step_free"
+      ],
+      "availability": [
+        {
+          "start_at": "2026-12-05T13:30:00Z",
+          "end_at": "2026-12-05T16:00:00Z"
+        }
+      ]
+    }
+  ],
+  "anchor_universe": [
+    "anchor_a",
+    "anchor_b",
+    "anchor_c"
+  ],
+  "synthetic_ranked_anchor_labels": {
+    "group_a": [
+      "anchor_a",
+      "anchor_b",
+      "anchor_c"
+    ],
+    "group_b": [
+      "anchor_b",
+      "anchor_a",
+      "anchor_c"
+    ],
+    "group_c": [
+      "anchor_a",
+      "anchor_c",
+      "anchor_b"
+    ]
+  },
+  "expected": {
+    "required_seats": 24,
+    "planned_seats": 25,
+    "quoted_revenue_pence": 50000,
+    "quoted_total_cost_pence": 47500,
+    "quoted_surplus_pence": 2500,
+    "payment_status": "NOT_COLLECTED"
+  }
+}
