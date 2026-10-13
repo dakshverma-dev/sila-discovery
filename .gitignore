@@ -27,3 +27,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 .claude/settings.local.json
+
+# Playwright
+test-results/
+playwright-report/

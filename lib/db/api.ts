@@ -41,6 +41,8 @@ const FUNCTIONS = [
   "get_match_run",
   "list_recoverable_match_runs",
   "request_venue_review",
+  "get_quote_terms",
+  "demo_simulate",
 ] as const;
 
 export type ApiFunction = (typeof FUNCTIONS)[number];

@@ -16,7 +16,8 @@
     "test:watch": "vitest",
     "test:reference": "python -m unittest discover -s specs -p \"test_*.py\"",
     "test:db": "vitest run --config vitest.db.config.ts",
-    "db:reset": "supabase db reset"
+    "db:reset": "supabase db reset",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
@@ -28,6 +29,7 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
+    "@playwright/test": "1.64.0",
     "@types/node": "22.20.5",
     "@types/pg": "8.23.1",
     "@types/react": "19.3.0",

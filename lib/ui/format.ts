@@ -21,3 +21,18 @@ const time = new Intl.DateTimeFormat("en-GB", {
 export function formatSlot(startIso: string, endIso: string): string {
   return `${dateTime.format(new Date(startIso))} – ${time.format(new Date(endIso))}`;
 }
+
+export function formatDateTime(iso: string): string {
+  return dateTime.format(new Date(iso));
+}
+
+/** "YYYY-MM-DDTHH:mm" for a datetime-local input, on the London date of `day`. */
+export function londonInputValue(day: Date, hour: number, minute: number): string {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: VENUE_TIMEZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(day);
+  return `${parts}T${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+}
