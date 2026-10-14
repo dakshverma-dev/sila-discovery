@@ -80,15 +80,30 @@ export function Motion() {
       tween(el, 1050, Number(el.dataset.delay ?? 0) + i * 70, OUT, (p) => { el.style.translate = `0 ${((1 - p) * 110).toFixed(2)}%`; }, () => { el.style.translate = ""; }, "reveal");
     };
 
+    // Hidden elements still waiting for the observer; released on cleanup so a remount picks them up again.
+    const waiting = new Set<HTMLElement>();
+    // A hidden element is invisible to the observer (a lowered title line sits outside its
+    // overflow-hidden mask; a closed plate is clipped to nothing), so its parent is observed instead.
+    const watched = new Map<Element, HTMLElement[]>();
+    const watch = (el: HTMLElement) => {
+      const target = el.parentElement ?? el;
+      watched.set(target, [...(watched.get(target) ?? []), el]);
+      waiting.add(el);
+      io.observe(target);
+    };
     const io = new IntersectionObserver(
       (ents) => {
         let i = 0, j = 0;
         for (const en of ents) {
           if (!en.isIntersecting) continue;
-          const el = en.target as HTMLElement;
-          io.unobserve(el);
-          if (el.hasAttribute("data-unfold")) unfold(el, j++);
-          else reveal(el, i++);
+          const els = watched.get(en.target) ?? [];
+          io.unobserve(en.target);
+          watched.delete(en.target);
+          for (const el of els) {
+            waiting.delete(el);
+            if (el.hasAttribute("data-unfold")) unfold(el, j++);
+            else reveal(el, i++);
+          }
         }
       },
       { rootMargin: "0px 0px -8% 0px" },
@@ -114,7 +129,7 @@ export function Motion() {
         el.setAttribute("data-uf", "");
         const b = el.getBoundingClientRect();
         if (b.top < vh && b.bottom > 0) nowU.push(el);
-        else { setMask(el, el.dataset.unfold ?? "wipe", 0); io.observe(el); }
+        else { setMask(el, el.dataset.unfold ?? "wipe", 0); watch(el); }
       });
       nowU.forEach(unfold);
       const nowR: HTMLElement[] = [];
@@ -122,7 +137,7 @@ export function Motion() {
         el.setAttribute("data-rv", "");
         const b = (el.parentElement ?? el).getBoundingClientRect();
         if (b.top < vh && b.bottom > 0) nowR.push(el);
-        else { el.style.translate = "0 110%"; io.observe(el); }
+        else { el.style.translate = "0 110%"; watch(el); }
       });
       nowR.forEach(reveal);
       document.querySelectorAll<HTMLElement>("[data-print]:not([data-pr])").forEach((el) => { el.setAttribute("data-pr", ""); printTicket(el); });
@@ -185,6 +200,7 @@ export function Motion() {
       window.removeEventListener("mousemove", onMouse);
       io.disconnect();
       mo.disconnect();
+      for (const el of waiting) { el.removeAttribute("data-uf"); el.removeAttribute("data-rv"); }
     };
   }, []);
 
