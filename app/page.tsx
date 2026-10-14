@@ -14,6 +14,40 @@ const STEPS = [
   { t: "The venue says yes", deg: "180deg", color: OX },
 ];
 
+const PATHS = [
+  {
+    kicker: "Demo data · read-only",
+    title: "Browse the showcase",
+    body: "Seven illustrative experiences, listed below. Open one to see why two communities were paired and how close it is to going ahead. Picking a date, committing or registering interest is kept in your browser only; nothing is stored or charged.",
+    cta: "See the experiences",
+    href: "#index",
+    color: OCHRE,
+  },
+  {
+    kicker: "Sandbox · fictional venue, real rules",
+    title: "Run the whole workflow",
+    body: "Get a private workspace for 24 hours with one fictional venue, five programmes and five groups. Switch between venue manager, organisers and participants, and take a proposal from suggestion to confirmed booking. Every step goes through the real booking rules; no payment is taken.",
+    cta: "sandbox",
+    href: null,
+    color: CIN,
+  },
+  {
+    kicker: "Matching explorer",
+    title: "Inspect the matching rules",
+    body: "One programme, its interested groups and a few preset scenarios on a single page. See which groups the matching rules exclude on budget, time, access or consent, and how the remaining combinations are ordered. Synthetic data, computed instantly; nothing is reserved.",
+    cta: "Open the matching explorer",
+    href: "/sandbox",
+    color: JADE,
+  },
+];
+
+const FLOW = [
+  { t: "Groups describe themselves", d: "Organisers set group size, per-person budget, exact availability, access needs and whether they will share a session." },
+  { t: "The agent proposes", d: "Hard requirements are checked first; cultural evidence then orders the feasible pairings. An organiser sends the best option to the venue." },
+  { t: "Terms are published", d: "The venue publishes fixed terms (price, date, minimum, deadline) and each organiser accepts for their group." },
+  { t: "People commit, venue confirms", d: "Participants reserve one seat each. Once the minimum is reached, the venue confirms the booking." },
+];
+
 export default async function HomePage({
   searchParams,
 }: {
@@ -80,9 +114,9 @@ export default async function HomePage({
                   sila finds communities whose tastes overlap, proposes something both would want, and gathers
                   reservations until a venue can say yes. Nothing is charged: no payment is collected.
                 </p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-                  <a href="#index" className="btn-ink">
-                    See what’s forming
+                <div className="hero-actions">
+                  <a href="#guide" className="btn-ink">
+                    How it works
                     <ArrowDown />
                   </a>
                   <form action={startSandbox}>
@@ -92,12 +126,59 @@ export default async function HomePage({
                     </button>
                   </form>
                 </div>
-                <p className="note" style={{ margin: 0, maxWidth: "44ch" }}>
-                  A private, isolated workspace with a fictional venue, five programmes and five community groups. Switch
-                  between venue manager, organisers and participants; it expires within 24 hours.
-                </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section id="guide" aria-labelledby="guide-h" className="guide">
+          <div className="wrap">
+            <div className="section-head">
+              <h2 id="guide-h" className="h-xl">
+                What you’re <em>looking at</em>
+              </h2>
+              <p>
+                sila is a hackathon prototype. It pairs community groups whose cultural tastes overlap, proposes one
+                session they would both enjoy, and only books it once enough people commit and the venue agrees. There
+                are three ways to explore it.
+              </p>
+            </div>
+            <ol className="paths">
+              {PATHS.map((p, i) => (
+                <li key={p.title} className="path" style={{ borderTopColor: p.color }}>
+                  <span className="kicker">
+                    {["i", "ii", "iii"][i]} · {p.kicker}
+                  </span>
+                  <h3>{p.title}</h3>
+                  <p>{p.body}</p>
+                  <div className="path-cta">
+                    {p.cta === "sandbox" ? (
+                      <form action={startSandbox}>
+                        <button type="submit" className="btn-ink">
+                          Start a sandbox
+                          <ArrowRight />
+                        </button>
+                      </form>
+                    ) : (
+                      <Link href={p.href!} className="link-under">
+                        {p.cta}
+                      </Link>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            <h3 className="flow-h">How a shared booking becomes real</h3>
+            <ol className="flow">
+              {FLOW.map((f, i) => (
+                <li key={f.t}>
+                  <span className="flow-n">{["i", "ii", "iii", "iv"][i]}</span>
+                  <strong>{f.t}</strong>
+                  <span>{f.d}</span>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
@@ -139,39 +220,16 @@ export default async function HomePage({
           <DemoBands list={list} />
         </section>
 
-        <section className="index" aria-labelledby="how-h">
-          <div className="wrap section two-col" style={{ paddingTop: "clamp(36px,5vw,72px)" }}>
-            <div>
-              <h2 id="how-h" className="h-lg">
-                How it becomes real
-              </h2>
-              <ul className="rules">
-                {[
-                  "Organisers describe their group: size, budget, exact availability, access needs and sharing choice.",
-                  "The agent checks hard requirements first, then uses cultural evidence to order feasible coalitions.",
-                  "The venue reviews and publishes immutable terms; each organiser accepts for their group.",
-                  "Participants reserve one seat each. The venue confirms when the threshold is met.",
-                ].map((t, i) => (
-                  <li key={t}>
-                    <span>{["i", "ii", "iii", "iv"][i]}</span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="note" style={{ marginTop: 18 }}>
-                Looking for the matching rules alone? Open the <Link href="/sandbox">matching explorer</Link>.
-              </p>
-            </div>
-            <div>
-              <h2 id="status-h" className="h-lg">
-                Build <em className="it" style={{ color: "var(--ox)" }}>status</em>
-              </h2>
-              <p className="lede">
-                Early hackathon build. The sandbox uses synthetic cultural evidence because its groups and programmes are
-                fictional. Live Qloo evidence is implemented behind a server-side adapter but has not yet been verified
-                with an issued key.
-              </p>
-            </div>
+        <section className="index" aria-labelledby="status-h">
+          <div className="wrap section" style={{ paddingTop: "clamp(48px,6vw,88px)" }}>
+            <h2 id="status-h" className="h-lg">
+              Build <em className="it" style={{ color: "var(--ox)" }}>status</em>
+            </h2>
+            <p className="lede">
+              Early hackathon build. The sandbox uses synthetic cultural evidence because its groups and programmes are
+              fictional. Live Qloo evidence is implemented behind a server-side adapter but has not yet been verified
+              with an issued key.
+            </p>
           </div>
         </section>
       </main>
