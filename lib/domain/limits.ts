@@ -1,4 +1,4 @@
-/** Release bounds from specs/config.json and D08. */
+/** Hackathon sandbox bounds; retired with the matching code (see docs/Sila_Product_Trial_and_Build_Guide.md). */
 export const LIMITS = {
   maximumGroups: 20,
   coalitionMin: 2,

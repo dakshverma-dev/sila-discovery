@@ -1,6 +1,6 @@
 # Project working instructions
 
-`AGENTS.md` is the **canonical** engineering instruction file for this project. Read it first, then consult the relevant documents under `docs/` and the contracts under `specs/` before making changes. In a conflict, follow the source-of-truth rules in `AGENTS.md` and ask for a decision instead of improvising.
+`AGENTS.md` is the **canonical** engineering instruction file for this project. Read it first, then consult `docs/Sila_Product_Trial_and_Build_Guide.md` (transcribing the canonical `docs/Sila_Combined_Product_Trial_and_Build_Guide.pdf`) before making changes. In a conflict, follow the source-of-truth rules in `AGENTS.md` and ask for a decision instead of improvising.
 
 This is a specification pack awaiting its application scaffold, not an already working or validated product. Build small, testable slices of the Shared Cultural Bookings workflow; retain the Qloo contract, booking invariants, privacy controls, synthetic/live labels, and accurate release status.
 
