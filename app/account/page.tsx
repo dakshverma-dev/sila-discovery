@@ -4,6 +4,8 @@ import { SiteHeader } from "@/components/sila/chrome";
 import { requireSilaActor } from "@/lib/sila/auth";
 
 export const metadata: Metadata = { title: "Account" };
+// Per-user: rendered at request time, never prerendered at build.
+export const dynamic = "force-dynamic";
 
 export default async function AccountPage() {
   const actor = await requireSilaActor("/account");
