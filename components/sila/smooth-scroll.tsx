@@ -10,11 +10,19 @@ export function SmoothScroll() {
   const path = usePathname();
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const l = new Lenis({ autoRaf: true, anchors: { offset: -64 }, lerp: 0.09, wheelMultiplier: 1 });
-    lenis.current = l;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => {
+      lenis.current?.destroy(); lenis.current = null;
+      if (!preference.matches) lenis.current = new Lenis({ autoRaf: true, anchors: { offset: -68 }, lerp: 0.09, wheelMultiplier: 1 });
+    };
+    const navigate = () => lenis.current?.scrollTo(window.scrollY, { immediate: true });
+    sync();
+    preference.addEventListener("change", sync);
+    window.addEventListener("sila:navigated", navigate);
     return () => {
-      l.destroy();
+      preference.removeEventListener("change", sync);
+      window.removeEventListener("sila:navigated", navigate);
+      lenis.current?.destroy();
       lenis.current = null;
     };
   }, []);

@@ -7,3 +7,7 @@ begin
     create role scb_app_login login password 'scb_local_dev_only' in role scb_app;
   end if;
 end $$;
+
+-- LOCAL DEVELOPMENT ONLY. Synthetic Sila operator for local sign-in; hosted
+-- environments add real operators deliberately, never from this seed.
+insert into sila.operators (email) values ('ops@sila.example') on conflict do nothing;

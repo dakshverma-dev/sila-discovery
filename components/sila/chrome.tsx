@@ -15,11 +15,13 @@ export function SiteHeader({
   navNode,
   persona,
   home = "/",
+  sampleData = false,
 }: {
   nav?: NavItem[];
   navNode?: React.ReactNode;
   persona?: { name: string; org: string | null } | null;
   home?: string;
+  sampleData?: boolean;
 }) {
   return (
     <header className="site-header">
@@ -29,7 +31,7 @@ export function SiteHeader({
         </Link>
         {navNode ?? (
         <nav aria-label="Sections" className="site-nav">
-          {(nav ?? []).map((n) =>
+          {(nav ?? [{ num: "", label: "Experiences", href: "/" }, { num: "", label: "My plans", href: "/plans" }, { num: "", label: "Venue workspace", href: "/venue" }]).map((n) =>
             n.href ? (
               <Link key={n.label} href={n.href} aria-current={n.current ? "page" : undefined}>
                 <i>{n.num}</i>
@@ -44,7 +46,7 @@ export function SiteHeader({
           )}
         </nav>
         )}
-        <span className="demo-tag">Demo data</span>
+        {sampleData || persona ? <span className="demo-tag">Sample data</span> : null}
         {persona && (
           <p className="persona-line">
             {persona.name}

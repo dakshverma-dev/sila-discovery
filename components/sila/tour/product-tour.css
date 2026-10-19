@@ -1,0 +1,89 @@
+.tour-root { background:var(--parch); color:var(--ink); min-height:100vh; }
+.tour-root button { font:inherit; cursor:pointer; }
+.tour-root button:focus-visible,.tour-root a:focus-visible { outline:3px solid var(--ox); outline-offset:4px; }
+.tour-mast { display:flex; align-items:center; gap:28px; padding:14px clamp(20px,5vw,80px); border-bottom:1px solid var(--ink); }
+.tour-logo { font:italic 36px/1 var(--serif); text-decoration:none; color:var(--ink); }
+.tour-edition { font-size:12px; letter-spacing:.02em; flex:1; }
+.tour-demo-label { border:1px solid currentColor; padding:5px 9px; text-transform:uppercase; letter-spacing:.12em; font-size:10px; }
+.tour-main { max-width:1400px; padding:0 clamp(16px,4vw,56px); margin:auto; }
+.tour-entry { display:grid; grid-template-columns:1fr 1.08fr; gap:clamp(36px,5vw,80px); padding:48px 0 20px; align-items:end; scroll-margin-top:70px; }
+.tour-entry h2 { font:400 clamp(36px,4vw,54px)/1 var(--serif); margin:0; letter-spacing:-.025em; }
+.tour-entry h2 em { font-weight:400; color:var(--ox); }
+.tour-entry p { font-size:13px; line-height:1.7; }.tour-entry .tour-eyebrow { font-size:10px; }
+.tour-entry .tour-disclosure { font-size:11px; color:var(--ox); margin-bottom:0; }
+.tour-intro { display:grid; grid-template-columns:1.4fr 1fr; gap:8%; padding:64px 0 48px; align-items:end; }
+.tour-eyebrow { font-size:10px; letter-spacing:.13em; text-transform:uppercase; font-weight:600; margin:0 0 15px; }
+.tour-intro h1 { font:400 clamp(45px,5.8vw,82px)/.95 var(--serif); letter-spacing:-.04em; margin:0 0 25px; }
+.tour-intro h1 em { color:var(--ox); font-weight:400; }
+.tour-dek { max-width:500px; font-size:16px; line-height:1.65; margin:0; }
+.tour-about { border-left:1px solid var(--hair); padding-left:32px; position:relative; }
+.tour-about h2 { font:400 29px/1.12 var(--serif); margin:0 0 16px; }
+.tour-about p { font-size:13px; line-height:1.65; }
+.tour-about .tour-disclosure { font-size:11px; color:var(--ox); margin:15px 0 0; }
+.tour-stamp { font:32px var(--font-amiri),serif; display:block; margin-bottom:10px; }
+.tour-workshop { display:grid; grid-template-columns:210px 1fr; background:var(--ink); color:var(--ivory); }
+.tour-art { background:var(--ochre); overflow:hidden; }
+.tour-art img { display:block; width:100%; height:100%; max-height:240px; object-fit:cover; object-position:50% 30%; mix-blend-mode:multiply; filter:grayscale(1); }
+.tour-workshop-copy { padding:25px 32px; }
+.tour-workshop h2 { font:400 clamp(29px,3vw,40px)/1.05 var(--serif); margin:0 0 9px; }
+.tour-workshop-copy > p:not(.tour-eyebrow) { font-size:13px; margin-bottom:20px; }
+.tour-workshop .tour-eyebrow { color:var(--ochre); }
+.tour-session-facts { display:flex; gap:36px; flex-wrap:wrap; }
+.tour-session-facts span { display:flex; flex-direction:column; font-size:11px; line-height:1.7; }
+.tour-session-facts b { font-size:13px; font-weight:500; }
+.tour-controls { display:flex; flex-wrap:wrap; gap:15px; justify-content:space-between; align-items:center; padding:27px 0; border-bottom:1px solid var(--ink); }
+.tour-scenarios { display:flex; gap:24px; flex-wrap:wrap; }
+.tour-controls button { border:0; background:none; padding:12px 0; color:var(--ink); font-size:13px; min-height:44px; }
+.tour-scenarios button { border-bottom:2px solid transparent; }
+.tour-scenarios button[aria-pressed=true] { border-bottom-color:var(--ox); color:var(--ox); font-weight:600; }
+.tour-controls .tour-reset { font-size:12px; text-decoration:underline; text-underline-offset:4px; }
+.tour-workspace { display:grid; grid-template-columns:minmax(220px,.8fr) minmax(0,1.8fr); gap:7%; padding:42px 0 55px; align-items:start; }
+.tour-guide { position:sticky; top:28px; }
+.tour-progress { height:3px; background:var(--hair); margin:0 0 28px; }
+.tour-progress span { display:block; height:100%; background:var(--ox); transition:width .35s ease; }
+.tour-date { color:var(--ox); font-size:12px; margin-bottom:14px; }
+.tour-guide h2 { font:400 36px/1.02 var(--serif); letter-spacing:-.02em; margin:0 0 20px; }
+.tour-guide p { font-size:14px; line-height:1.7; }
+.tour-primary { display:flex; align-items:center; gap:18px; justify-content:space-between; width:100%; text-align:left; border:0; color:var(--ivory); background:var(--ox); padding:17px; margin-top:28px; font-size:13px!important; font-weight:600!important; line-height:1.5; min-height:48px; }
+.tour-primary:hover { background:var(--ink); }
+.tour-guide .tour-hint { font-size:11px; margin:13px 0 0; line-height:1.5; }
+.tour-guide .tour-clock-note { border-left:2px solid var(--ox); padding-left:12px; font-size:12px; }
+.tour-screen { border:1px solid var(--ink); min-width:0; background:var(--ivory); }
+.tour-roles { display:flex; border-bottom:1px solid var(--ink); background:var(--parch); }
+.tour-roles button { flex:1; border:0; background:none; padding:14px 9px; min-height:48px; font-size:11px; border-bottom:3px solid transparent; color:var(--ink); }
+.tour-roles button[aria-pressed=true] { background:var(--ink); color:var(--ivory); border-bottom-color:var(--ochre); }
+.tour-screen-body { padding:26px 30px; }
+.tour-status { display:inline-flex; align-items:center; gap:7px; font-size:11px; color:var(--ox); margin-bottom:24px; font-weight:500; }
+.tour-status-positive { color:var(--olive); }
+.tour-screen-body > .tour-eyebrow { margin-bottom:8px; }
+.tour-screen h2 { font:400 clamp(27px,3vw,38px)/1.05 var(--serif); margin:0 0 6px; }
+.tour-screen-sub { font-size:12px; margin-bottom:25px; }
+.tour-seat-summary { border-top:1px solid var(--hair); padding-top:20px; display:flex; gap:18px; align-items:center; }
+.tour-seat-summary > strong { font:400 57px/1 var(--serif); font-variant-numeric:lining-nums; }
+.tour-seat-summary small { font-size:24px; }
+.tour-seat-summary div { display:flex; flex-direction:column; gap:4px; }
+.tour-seat-summary b { font-size:12px; }
+.tour-seat-summary span { font-size:11px; }
+.tour-seats { display:grid; grid-template-columns:repeat(20,minmax(0,1fr)); gap:4px; margin:18px 0 10px; }
+.tour-seats > span { height:25px; border:1px solid var(--hair); }
+.tour-seats .tour-seat-a { background:var(--ox); border-color:var(--ox); }
+.tour-seats .tour-seat-b { background:var(--olive); border-color:var(--olive); }
+.tour-seats .tour-seat-spare { border-style:dashed; }
+.tour-seat-legend { display:flex; gap:12px; flex-wrap:wrap; font-size:9px; margin-bottom:25px; }
+.tour-seat-legend span { display:flex; align-items:center; gap:5px; }
+.tour-seat-legend i { display:inline-block; width:7px; height:7px; }
+.tour-key-a { background:var(--ox); }.tour-key-b { background:var(--olive); }
+.tour-club-row { display:flex; align-items:center; justify-content:space-between; gap:15px; padding:17px 0; border-top:1px solid var(--hair); }
+.tour-club-row > div { display:flex; flex-direction:column; gap:5px; }
+.tour-club-row b { font-size:12px; }.tour-club-row span { font-size:10px; }.tour-club-row > span { text-align:right; color:var(--ox); max-width:130px; }
+.tour-money-box { border:1px solid var(--ink); padding:18px 20px; display:flex; flex-direction:column; margin:23px 0; }
+.tour-money-box p { font-size:12px; margin:0 0 4px; }.tour-money-box strong { font:400 48px/1.15 var(--serif); font-variant-numeric:lining-nums; }.tour-money-box span { font-size:11px; margin-top:7px; line-height:1.65; }
+.tour-deadlines { margin:24px 0 18px; font-size:11px; }.tour-deadlines > div { display:grid; grid-template-columns:140px 1fr; gap:12px; padding:10px 0; border-top:1px solid var(--hair); }.tour-deadlines dt { text-transform:uppercase; font-size:9px; letter-spacing:.08em; }.tour-deadlines dd { margin:0; }
+.tour-permission { font-size:11px; line-height:1.65; border-left:2px solid var(--ox); padding-left:12px; }
+.tour-practical { border-top:1px solid var(--hair); padding-top:18px; margin-top:23px; }.tour-practical h3 { font:400 26px var(--serif); }.tour-practical p { font-size:12px; }.tour-practical button { border:1px solid var(--ink); padding:12px; min-height:44px; background:none; font-size:12px; }.tour-practical > span { font-size:11px; padding-left:10px; }
+.tour-value { display:grid; grid-template-columns:1fr 1fr; gap:10%; padding:35px 0 50px; border-top:1px solid var(--ink); }.tour-value h2 { font:400 43px/1 var(--serif); }.tour-value h3 { font:400 28px var(--serif); }.tour-value p { font-size:13px; line-height:1.75; }.tour-value .tour-credit { font-size:10px; }
+.tour-footer { padding:24px clamp(20px,5vw,80px); border-top:1px solid var(--ink); display:flex; align-items:center; flex-wrap:wrap; gap:25px; font-size:11px; }.tour-footer > span:last-child { margin-left:auto; }
+@media(max-width:800px) { .tour-intro { grid-template-columns:1fr; gap:30px; padding-top:40px; }.tour-about { border-left:0; padding-left:0; border-top:1px solid var(--hair); padding-top:20px; }.tour-stamp { float:right; }.tour-workspace { grid-template-columns:1fr; gap:25px; }.tour-guide { position:static; }.tour-primary { max-width:440px; }.tour-guide h2 { font-size:32px; }.tour-workshop { grid-template-columns:140px 1fr; }.tour-session-facts { gap:15px; }.tour-value { gap:30px; } }
+@media(max-width:480px) { .tour-edition { display:none; }.tour-demo-label { margin-left:auto; }.tour-main { padding:0 18px; }.tour-workshop { grid-template-columns:1fr; }.tour-art { height:130px; }.tour-art img { object-fit:contain; object-position:center; }.tour-workshop-copy { padding:23px; }.tour-workshop h2 { font-size:30px; }.tour-workspace { padding-top:28px; }.tour-screen-body { padding:20px 17px; }.tour-roles button { font-size:10px; padding:10px 6px; }.tour-seat-summary { align-items:flex-start; gap:10px; }.tour-seat-summary > strong { font-size:45px; }.tour-seat-summary small { font-size:19px; }.tour-seat-summary span { font-size:10px; }.tour-seats { gap:3px; }.tour-seats > span { height:20px; }.tour-club-row { flex-direction:column; align-items:flex-start; gap:6px; }.tour-club-row > span { text-align:left; max-width:none; }.tour-deadlines > div { grid-template-columns:100px 1fr; }.tour-value { grid-template-columns:1fr; }.tour-footer { gap:15px; }.tour-footer > span:last-child { width:100%; margin-left:0; } }
+@media(prefers-reduced-motion:reduce) { .tour-progress span { transition:none; } }
+@media(max-width:700px) { .tour-entry { grid-template-columns:1fr; gap:22px; padding-top:35px; }.tour-value { scroll-margin-top:70px; } }

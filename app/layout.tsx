@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Amiri, Cormorant_Garamond, Schibsted_Grotesk } from "next/font/google";
+import { SILA_MOTION_BOOT } from "@/lib/ui/sila/motion-boot";
 import { Motion } from "@/components/sila/motion";
 import { SmoothScroll } from "@/components/sila/smooth-scroll";
 import "./globals.css";
+import "@/components/sila/application/application.css";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -25,15 +27,15 @@ export const metadata: Metadata = {
 };
 
 // Hides animated elements before first paint so the motion layer can play them in; skipped with reduced motion.
-const MOTION_BOOT = `try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js-motion')}catch(e){}`;
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" className={`${cormorant.variable} ${schibsted.variable} ${amiri.variable}`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: MOTION_BOOT }} />
+        <script dangerouslySetInnerHTML={{ __html: SILA_MOTION_BOOT }} />
       </head>
-      <body>
+      <body className="sila-app">
         <a className="skip-link" href="#main">
           Skip to main content
         </a>

@@ -31,15 +31,11 @@ function maskFor(type: string, a: number): string | null {
   return null;
 }
 
-export function Motion() {
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function startMotion() {
     const root = document.documentElement;
-    if (reduced) {
-      root.classList.remove("js-motion");
-      return;
-    }
     root.classList.add("js-motion");
+    root.dataset.silaMotion = "ready";
+    const timers = new Set<number>();
 
     let tweens: Tween[] = [];
     let mx = 0, my = 0, tmx = 0, tmy = 0;
@@ -53,13 +49,15 @@ export function Motion() {
       tweens.push(t);
       apply(0);
       // rAF doesn't run in hidden documents: guarantee the end state regardless.
-      window.setTimeout(() => {
+      const timer = window.setTimeout(() => {
+        timers.delete(timer);
         if (tweens.includes(t)) {
           tweens = tweens.filter((x) => x !== t);
           t.apply(1);
           t.done?.();
         }
       }, delay + dur + 120);
+      timers.add(timer);
     };
 
     const setMask = (el: HTMLElement, type: string, a: number) => {
@@ -77,7 +75,11 @@ export function Motion() {
       tween(el, type === "wipe" ? 1100 : 1250, 80 + i * 85, type === "wipe" ? INOUT : OUT, (p) => setMask(el, type, p), () => setMask(el, type, 1), "unfold");
     };
     const reveal = (el: HTMLElement, i: number) => {
-      tween(el, 1050, Number(el.dataset.delay ?? 0) + i * 70, OUT, (p) => { el.style.translate = `0 ${((1 - p) * 110).toFixed(2)}%`; }, () => { el.style.translate = ""; }, "reveal");
+      const rise = el.dataset.reveal === "rise";
+      tween(el, 1050, Number(el.dataset.delay ?? 0) + i * 70, OUT, (p) => {
+        el.style.translate = `0 ${((1 - p) * (rise ? 28 : 110)).toFixed(2)}${rise ? "px" : "%"}`;
+        if (rise) el.style.opacity = String(p);
+      }, () => { el.style.translate = ""; if (rise) el.style.opacity = ""; }, "reveal");
     };
 
     // Hidden elements still waiting for the observer; released on cleanup so a remount picks them up again.
@@ -137,7 +139,7 @@ export function Motion() {
         el.setAttribute("data-rv", "");
         const b = (el.parentElement ?? el).getBoundingClientRect();
         if (b.top < vh && b.bottom > 0) nowR.push(el);
-        else { el.style.translate = "0 110%"; watch(el); }
+        else { el.style.translate = el.dataset.reveal === "rise" ? "0 28px" : "0 110%"; if (el.dataset.reveal === "rise") el.style.opacity = "0"; watch(el); }
       });
       nowR.forEach(reveal);
       document.querySelectorAll<HTMLElement>("[data-print]:not([data-pr])").forEach((el) => { el.setAttribute("data-pr", ""); printTicket(el); });
@@ -185,10 +187,11 @@ export function Motion() {
       tmy = e.clientY / window.innerHeight - 0.5;
     };
     let pending = false;
+    let scanRaf = 0;
     const mo = new MutationObserver(() => {
       if (pending) return;
       pending = true;
-      requestAnimationFrame(() => { pending = false; scan(); });
+      scanRaf = requestAnimationFrame(() => { pending = false; scan(); });
     });
 
     scan();
@@ -197,11 +200,34 @@ export function Motion() {
     mo.observe(document.body, { childList: true, subtree: true });
     return () => {
       cancelAnimationFrame(raf);
+      cancelAnimationFrame(scanRaf);
+      timers.forEach(window.clearTimeout);
       window.removeEventListener("mousemove", onMouse);
       io.disconnect();
       mo.disconnect();
-      for (const el of waiting) { el.removeAttribute("data-uf"); el.removeAttribute("data-rv"); }
+      document.querySelectorAll<HTMLElement>("[data-unfold], [data-reveal], [data-speed], [data-depth], [data-lamp]").forEach(el => {
+        el.removeAttribute("data-uf"); el.removeAttribute("data-rv");
+        el.style.translate = "";
+        if (el.hasAttribute("data-unfold")) { el.style.clipPath = ""; el.style.maskImage = ""; el.style.removeProperty("-webkit-mask-image"); }
+        if (el.dataset.reveal === "rise") el.style.opacity = "";
+      });
+      root.classList.remove("js-motion");
+      delete root.dataset.silaMotion;
     };
+}
+
+export function Motion() {
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let stop: (() => void) | undefined;
+    const sync = () => {
+      stop?.(); stop = undefined;
+      if (!preference.matches) stop = startMotion();
+      else document.documentElement.classList.remove("js-motion");
+    };
+    sync();
+    preference.addEventListener("change", sync);
+    return () => { preference.removeEventListener("change", sync); stop?.(); };
   }, []);
 
   return null;

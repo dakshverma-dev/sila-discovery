@@ -28,6 +28,24 @@ const STATUS: Record<string, number> = {
   QLOO_UNAVAILABLE: 503,
   DATABASE_UNAVAILABLE: 503,
   JOB_DEADLINE_EXCEEDED: 504,
+  // Sila pilot (§24).
+  INVALID_FIELDS: 422,
+  QUANTITY_NOT_APPROVED: 422,
+  NOT_DRAFT: 409,
+  INTAKE_PAUSED: 409,
+  SESSION_NOT_OPEN: 409,
+  FILL_DEADLINE_PASSED: 409,
+  MINIMUM_ALREADY_REACHED: 409,
+  NOT_APPROVED: 409,
+  STALE_TERMS: 409,
+  ALREADY_COMMITTED: 409,
+  NOT_COMMITTED: 409,
+  PLAN_DECLINED: 409,
+  CLUB_LIMIT_REACHED: 409,
+  SECOND_CLUB_BELOW_MINIMUM: 409,
+  WAIT_EXCEEDS_LIMIT: 409,
+  DUPLICATE_RECEIPT: 409,
+  PAYMENT_NOT_OPEN: 409,
 };
 
 const RETRYABLE = new Set(["RATE_LIMITED", "QLOO_UNAVAILABLE", "DATABASE_UNAVAILABLE", "JOB_DEADLINE_EXCEEDED"]);
@@ -47,22 +65,38 @@ export function success(data: unknown, status = 200, meta: Record<string, unknow
   return Response.json({ data, meta: { request_id: randomUUID(), ...meta } }, { status });
 }
 
-export function failure(code: string, message: string, fieldErrors: Record<string, string[]> = {}): Response {
+export function failure(
+  code: string,
+  message: string,
+  fieldErrors: Record<string, string[]> = {},
+  details?: Record<string, unknown>,
+): Response {
   return Response.json(
     {
-      error: { code, message, field_errors: fieldErrors, retryable: RETRYABLE.has(code) },
+      error: { code, message, field_errors: fieldErrors, retryable: RETRYABLE.has(code), ...(details ? { details } : {}) },
       meta: { request_id: randomUUID() },
     },
     { status: STATUS[code] ?? 500 },
   );
 }
 
-/** Converts a guarded-function envelope into an HTTP response. */
-export function fromResult<T>(result: ApiResult<T>, project: (data: T) => unknown = (d) => d, status = 200): Response {
+/**
+ * Converts a guarded-function envelope into an HTTP response. With
+ * `{ details: true }`, error details other than field errors (for example
+ * publication `blockers`) are passed through as `error.details`.
+ */
+export function fromResult<T>(
+  result: ApiResult<T>,
+  project: (data: T) => unknown = (d) => d,
+  status = 200,
+  options: { details?: boolean } = {},
+): Response {
   if (result.ok) return success(project(result.data), status, result.replayed ? { replayed: true } : {});
-  const fields = (result.error.details?.field_errors ?? {}) as Record<string, string[] | null>;
+  const { field_errors: rawFields, ...rest } = result.error.details ?? {};
+  const fields = (rawFields ?? {}) as Record<string, string[] | null>;
   const clean = Object.fromEntries(Object.entries(fields).filter(([, v]) => Array.isArray(v))) as Record<string, string[]>;
-  return failure(result.error.code, result.error.message, clean);
+  const details = options.details && Object.keys(rest).length > 0 ? rest : undefined;
+  return failure(result.error.code, result.error.message, clean, details);
 }
 
 export interface Actor {
@@ -105,7 +139,16 @@ export function idempotencyKey(request: Request): string {
   return key;
 }
 
-export async function readJson<S extends z.ZodType>(request: Request, schema: S): Promise<z.infer<S>> {
+/**
+ * Reads and validates a JSON body. Schema failures use `fieldErrorCode`
+ * (Sila routes pass `INVALID_FIELDS`, 422, per §24); oversized or non-JSON
+ * bodies are always VALIDATION_FAILED.
+ */
+export async function readJson<S extends z.ZodType>(
+  request: Request,
+  schema: S,
+  fieldErrorCode: "VALIDATION_FAILED" | "INVALID_FIELDS" = "VALIDATION_FAILED",
+): Promise<z.infer<S>> {
   const length = Number(request.headers.get("content-length") ?? "0");
   if (length > MAX_BODY_BYTES) throw new HttpError("VALIDATION_FAILED", "Request body is too large.");
   const text = await request.text();
@@ -123,7 +166,7 @@ export async function readJson<S extends z.ZodType>(request: Request, schema: S)
       const key = issue.path.join(".") || "body";
       (fields[key] ??= []).push(issue.message);
     }
-    throw new HttpError("VALIDATION_FAILED", "Check the highlighted fields.", fields);
+    throw new HttpError(fieldErrorCode, "Check the highlighted fields.", fields);
   }
   return parsed.data;
 }

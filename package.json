@@ -8,6 +8,9 @@
   },
   "scripts": {
     "dev": "next dev",
+    "demo": "node scripts/sila-demo.mjs",
+    "demo:seed": "node scripts/sila-demo.mjs --seed-only",
+    "demo:build": "node scripts/build-customer-demo.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",

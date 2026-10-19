@@ -11,10 +11,32 @@ Engineering instructions are in `AGENTS.md`. Decisions and risks are logged in `
 
 ## Current status
 
-**The pilot is not built yet, and nothing is live.** No venue, club, booking or payment exists.
+**The product interface with sample records is hosted; the real booking path is implemented locally. The live pilot is not released.** All rehearsal contacts, sessions and payment records are synthetic.
 
-- `lib/sila/` contains the pilot rules (deadlines and payment clock, money, publication gates, commitment, confirmation, plan states) as pure functions with unit tests. They are not yet connected to the database, API or UI.
-- The app that currently runs, locally and at https://shared-cultural-bookings.vercel.app, is the **superseded Qloo hackathon sandbox** (synthetic data, automated matching, per-participant reservations, no payment). It is being replaced ticket by ticket; see the ticket table in the guide document.
+- Pilot routes support email sign-in, venue drafts/publication, retained club requests, approval, atomic commitment, staffed payment release, receipt recording, checked confirmation, full-return closure/refund records and private practical downloads. Venue and organiser records are isolated; operators have audited venue scopes.
+- The superseded hackathon sandbox remains alongside the local pilot. Private evidence uploads, notification delivery, balance default/remedy, amendments, recovery and remaining release controls are unfinished; see the guide's repository status.
+
+## Show customers the product
+
+Open [Sila with sample records](https://sila-demo-preview.vercel.app). It has normal experience pages and organiser, venue, finance and operations dashboards. Use the account menu to choose a supplied sample user. Requests, approvals, commitments, receipts, confirmation, refunds, conversations, draft publication and introductions update records that persist in your browser.
+
+This separate static Vercel project uses isolated browser persistence, with no booking database or Auth connection. It does not accept real bookings, send emails or move money. The authenticated application remains separate and shares the dashboard presentation. See [the account guide and walkthrough](docs/Sila_Customer_Demo_Walkthrough.md) for the sample scenarios and remaining live-service work.
+
+Build with `npm run demo:build`; preview with `node scripts/serve-customer-app.mjs` at http://localhost:3400. It exports and scans `customer-demo/out`, including fallback routes for newly created sample records. Deploy only that export to the existing separate preview project; the root project still refers to the legacy app.
+
+## Try the local pilot demo
+
+With Node.js 22+, npm dependencies and Docker available:
+
+```bash
+npm run demo
+```
+
+Open [the local demo](http://localhost:3300/pilot-demo). Start as the venue coordinator, review/publish the prepared fictional workshop, then switch to the club organiser. Sign-in links arrive in [the local email inbox](http://127.0.0.1:56324); follow a link in the browser profile that requested it. Use separate profiles to act as two clubs.
+
+The demo has its own Supabase Docker project, database on port 56322, email inbox and Next output directory. It cannot use a hosted database. `npm run demo:seed` prepares the data without starting the web app. Re-running preserves existing agreements and receipts. The workshop starts as a draft; no real terms, hold, coverage or payment are approved. Payment opening retains the real staffed-release checks; the browser rehearsal advances only its isolated synthetic fixture's clock.
+
+The source for the separate stack is copied under ignored `.supabase/sila-demo/`. To stop its Docker services, run `npx supabase stop --workdir .supabase/sila-demo`; stop the web app with Ctrl+C.
 
 ## Development
 
@@ -32,11 +54,14 @@ npm run dev                   # http://localhost:3000
 | Script | Purpose |
 | --- | --- |
 | `npm test` | Unit tests, including the Sila rules in `tests/unit/sila-*.test.ts` |
-| `npm run test:db` | Integration tests against the local database (hackathon schema) |
-| `npm run test:e2e` | Playwright journeys and axe accessibility scans (hackathon sandbox) |
+| `npm run test:db` | Integration tests for the hackathon and pilot schemas, including 100 competing commitment commands |
+| `npm run test:e2e` | Playwright journeys and axe accessibility scans; `tests/e2e/sila-*.spec.ts` cover the pilot |
 | `npm run check:bundle` | After a build, fail if secrets or server-only markers appear in browser JavaScript |
+| `npm run demo:build` | Build and scan the product UI with isolated sample records; no booking backend is included |
 | `npm run typecheck` / `npm run lint` / `npm run build` | Static checks and production build |
 | `npm run db:reset` | Re-apply migrations and seed locally |
+
+Pilot development also needs `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `APP_BASE_URL` and `SILA_DRAFT_SECRET` (at least 32 random characters). Keep synthetic browser tests on loopback services. Set `DATABASE_ADMIN_URL`, `DATABASE_URL`, `MAILPIT_URL` and `E2E_BASE_URL` when using an alternate local stack. The demo command sets its own local credentials and does not edit `.env.local`.
 
 ## Deployment
 

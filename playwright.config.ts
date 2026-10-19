@@ -22,6 +22,12 @@ export default defineConfig({
     reuseExistingServer: true,
     timeout: 300_000,
     // Each test starts its own sandbox; raise the per-IP creation limit for the suite only.
-    env: { SANDBOX_RATE_LIMIT: "200" },
+    // Sila sign-in runs against the local Supabase stack (`npx supabase start`); anon key comes from the environment or .env.local.
+    env: {
+      SANDBOX_RATE_LIMIT: "200",
+      APP_BASE_URL: "http://localhost:3100",
+      NEXT_PUBLIC_SUPABASE_URL: process.env.E2E_SUPABASE_URL ?? "http://127.0.0.1:54321",
+      ...(process.env.E2E_SUPABASE_ANON_KEY ? { NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.E2E_SUPABASE_ANON_KEY } : {}),
+    },
   },
 });

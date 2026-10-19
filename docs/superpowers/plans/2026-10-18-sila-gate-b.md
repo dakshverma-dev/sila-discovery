@@ -31,6 +31,16 @@
 
 ## Review Focus
 
+### Local execution record — 19 October 2026
+
+The existing Gate B implementation and unfinished venue/operator work were recovered from the `sila-gate-b` worktree and integrated in the main checkout as uncommitted changes. The original worktree was preserved. Tasks 9 and 10 now have working venue/operator screens and a production-build ordinary-booking rehearsal on desktop and at 320px. The separate `npm run demo` stack adds labelled fictional data and role sign-in without relaxing the payment clock.
+
+Verification: 196 unit tests, 152 database tests (including 100 competing commitments), TypeScript, lint, production build, client-bundle secret scan and local Supabase advisors pass. The production pilot browser run has 14 passes and two environment-specific skips; separate demo runs each have one pass and one skip on desktop and mobile. Browser timing waits for completed venue actions before changing actors or inspecting the ledger.
+
+The commit steps remain pending: no commit, merge commit, push or hosted booking deployment was made. This is synthetic local Gate B evidence, not completion of every P0 ticket. The guide's Repository status lists the remaining privacy, storage, jobs and release requirements.
+
+Subsequent 19 October follow-up: a standalone static customer tour is hosted separately at https://sila-demo-preview.vercel.app. The local application adds final-decision/unfilled closure, venue-caused cancellation, append-only full-return refund records and private practical downloads. Updated evidence is 202 unit tests, 164 database tests, 16 production-build browser passes with two local-demo-only skips, and four static-tour browser passes. The shared browser rehearsal covers 7 + 9 places and distinct deposits on both viewports. These additions do not complete balance notice/remedy, amendments, evidence files, notification delivery or the remaining live release requirements; the working guide remains the current status source.
+
 1. **Double submit / lost signal** — the organiser taps "Request" or "Commit" twice, or the browser retries after a dropped connection: exactly one plan / one allocation results. Tests: Task 4 (`submit_plan replay`), Task 5 (`commit_plan replay`), Task 8 (resume page twice).
 2. **Old link after things changed** — an organiser opens a commitment page after the session filled, closed, or its terms version changed: they see the specific reason and no allocation is created. Tests: Task 5 (`STALE_TERMS`, `MINIMUM_ALREADY_REACHED`, `FILL_DEADLINE_PASSED`).
 3. **Email case in invitations** — coordinator invited as `Coordinator@Venue.Example` signs in as `coordinator@venue.example`: they get the role. Test: Task 1.

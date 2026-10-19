@@ -60,7 +60,7 @@ export function json(value: unknown): JsonParam {
   return new JsonParam(value);
 }
 
-function toParam(a: unknown): unknown {
+export function toParam(a: unknown): unknown {
   if (a instanceof JsonParam) return JSON.stringify(a.value);
   // Plain objects are jsonb; arrays stay SQL arrays (uuid[], text[]).
   if (a !== null && typeof a === "object" && !Array.isArray(a) && !(a instanceof Date)) return JSON.stringify(a);
