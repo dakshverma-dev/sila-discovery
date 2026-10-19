@@ -3,6 +3,9 @@ node_modules/
 
 # build output
 .next/
+.next-demo/
+customer-demo/out/
+customer-demo/public/
 out/
 build/
 coverage/
@@ -34,3 +37,8 @@ Thumbs.db
 test-results/
 playwright-report/
 
+
+# design reference material (kept local; the build cites it, but it is not shipped)
+Design/
+Sila prototype launch/
+Sila prototype launch.zip
