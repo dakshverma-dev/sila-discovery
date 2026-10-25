@@ -1,0 +1,23 @@
+{
+  "deploymentId": "dpl_BxR8ytVE5RE6B5iP4ZULWm9DdcVq",
+  "projectId": "prj_jdjbAJ7bCP0NkJ9WVHGtdYQ0TGJv",
+  "teamId": "team_eAfxLULwUQD4ug7Ffuqkkp5S",
+  "url": "https://sila-discovery-4mxmd4sx7-dakshverma675-gmailcoms-projects.vercel.app/discover",
+  "sourceCommit": "92b9d696a250bc18362491fa6287c878804834c0",
+  "sourceBranch": "codex/sila-discovery",
+  "readyState": "READY",
+  "target": "preview (API target null)",
+  "runtimeRegions": [
+    "sin1"
+  ],
+  "aliasError": null,
+  "verification": "Vercel deployment metadata plus local production HTTP checks against the new hosted database; no deployed-URL fetch or browser test",
+  "browser": "Retried; local browser use disabled in Work settings",
+  "originalProject": {
+    "id": "prj_wir8SwIYhe2RbEdWQESl8gLso1fy",
+    "name": "shared-cultural-bookings",
+    "updatedAtBefore": 1792427461039,
+    "updatedAtAfter": 1792427461039,
+    "latestDeployment": "dpl_919C792ffeF1oPnLCZWK5Biv4gnk"
+  }
+}

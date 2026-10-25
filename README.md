@@ -2,7 +2,7 @@
 
 This repository is the separate Qloo hackathon edition of [Shared Cultural Bookings](https://github.com/dakshverma-dev/Shared-Cultural-Bookings). The original pilot repository and its deployments remain separate. This edition's hosted entry point is `/discover`; the hosted configuration blocks pilot routes and does not run the pilot cron job.
 
-Deployment details are recorded in [the hosting record](docs/submission/HOSTING.md). The inherited pilot source and Git history are retained for provenance; this deployment uses only the isolated `discovery` schema and a dedicated restricted database login.
+Try [the separate discovery preview](https://sila-discovery-4mxmd4sx7-dakshverma675-gmailcoms-projects.vercel.app/discover). Deployment details are recorded in [the hosting record](docs/submission/HOSTING.md). The inherited pilot source and Git history are retained for provenance; this deployment uses only the isolated `discovery` schema and a dedicated restricted database login.
 
 ## Hackathon discovery edition — 25 October 2026
 

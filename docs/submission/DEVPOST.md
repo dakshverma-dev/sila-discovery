@@ -4,7 +4,7 @@ Project name: **Sila — shared culture, grounded in taste**
 
 Tagline: **Turn what your club loves into an Edinburgh outing that actually fits.**
 
-Public demo link: see `HOSTING.md` for the verified new Vercel preview.
+Public demo link: https://sila-discovery-4mxmd4sx7-dakshverma675-gmailcoms-projects.vercel.app/discover — separate Vercel preview; hosting checks and browser-verification limitation are in `HOSTING.md`.
 
 Repository: https://github.com/dakshverma-dev/sila-discovery — dedicated hackathon fork. Original project: https://github.com/dakshverma-dev/Shared-Cultural-Bookings.
 

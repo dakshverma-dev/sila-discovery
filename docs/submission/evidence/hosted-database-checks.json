@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-10-25T11:33:35.117Z",
+  "scope": "Local production server on loopback using the new hosted Neon database and real Qloo; not a hosted-browser test",
+  "checks": [
+    "root directs visitors to discovery",
+    "pilot APIs blocked on discovery host",
+    "real Qloo lookup through new hosted store",
+    "live recommendations persist in dedicated Neon database",
+    "conditional sample request saved through Neon pooler",
+    "request retry remains idempotent",
+    "owner can reopen persisted request",
+    "another visitor cannot retrieve request",
+    "cross-origin writes rejected"
+  ],
+  "requestId": "b8874a31-4cbc-4ac3-bbe7-4eb6d622339a",
+  "runId": "07dfc6b8-8b32-4df9-b003-5725cde90adb",
+  "recommendationIds": [
+    "garden-art",
+    "gallery-evening",
+    "museum-stories"
+  ]
+}
