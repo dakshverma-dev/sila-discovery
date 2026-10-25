@@ -14,7 +14,9 @@ function database() {
     max: 4,
     connectionTimeoutMillis: 5000,
     idleTimeoutMillis: 10000,
-    options: "-c statement_timeout=5000",
+    // Server timeout is configured on the dedicated role by discovery/schema.sql.
+    // Poolers such as Neon reject a startup `options` statement_timeout parameter.
+    query_timeout: 6000,
   }));
 }
 export class DiscoveryError extends Error {

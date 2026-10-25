@@ -1,4 +1,5 @@
 -- Isolated hackathon database. Never apply to the live pilot database.
+alter role sila_discovery set statement_timeout = '5s';
 create schema if not exists discovery;
 create table if not exists discovery.sessions (
   id text primary key, snapshot jsonb not null
