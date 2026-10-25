@@ -8,6 +8,16 @@ import { NextResponse, type NextRequest } from "next/server";
  * stays in the pages and handlers (`lib/sila/auth.ts`).
  */
 export async function proxy(request: NextRequest): Promise<NextResponse> {
+  // The separate hackathon host exposes only its isolated discovery module.
+  if (process.env.SILA_DISCOVERY_ONLY === "1") {
+    const path = request.nextUrl.pathname;
+    const allowed = path === "/" || /^\/(?:discover|requests)(?:\/|$)/.test(path)
+      || /^\/api\/(?:discover|interests|place-requests)(?:\/|$)/.test(path)
+      || /^\/(?:_next|art|fonts)(?:\/|$)/.test(path)
+      || /\.(?:ico|svg|png|jpg|jpeg|webp|woff2?)$/.test(path);
+    if (!allowed) return new NextResponse("Not found", { status: 404 });
+    return NextResponse.next({ request });
+  }
   const privatePath = /^\/(?:account|auth|plans|venue|ops|sign-in|pilot-demo)(?:\/|$)/.test(request.nextUrl.pathname)
     || request.nextUrl.pathname.startsWith("/api/v1/sila/");
   const protectedResponse = (response: NextResponse) => {

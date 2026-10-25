@@ -1,0 +1,13 @@
+.git/
+.env*
+!.env.example
+.discovery-local.json
+submission-local/
+node_modules/
+.next/
+.next-demo/
+Design/
+customer-demo/
+test-results/
+playwright-report/
+*.tsbuildinfo

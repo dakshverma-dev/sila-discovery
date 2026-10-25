@@ -23,7 +23,7 @@ const amiri = Amiri({ subsets: ["arabic"], weight: "400", variable: "--font-amir
 export const metadata: Metadata = {
   title: { default: "sila", template: "%s · sila" },
   description:
-    "sila: cultural experiences that happen when enough of us ask for them. Communities pool interest to reserve venue-approved sessions in Edinburgh.",
+    "Find an Edinburgh cultural experience through your club's tastes. Live Qloo discovery with clearly fictional sessions and private sample requests.",
 };
 
 // Hides animated elements before first paint so the motion layer can play them in; skipped with reduced motion.
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" className={`${cormorant.variable} ${schibsted.variable} ${amiri.variable}`} suppressHydrationWarning>
+    <html lang="en-GB" data-scroll-behavior="smooth" className={`${cormorant.variable} ${schibsted.variable} ${amiri.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: SILA_MOTION_BOOT }} />
       </head>

@@ -1,4 +1,32 @@
-# Sila
+# Sila discovery
+
+This repository is the separate Qloo hackathon edition of [Shared Cultural Bookings](https://github.com/dakshverma-dev/Shared-Cultural-Bookings). The original pilot repository and its deployments remain separate. This edition's hosted entry point is `/discover`; the hosted configuration blocks pilot routes and does not run the pilot cron job.
+
+Deployment details are recorded in [the hosting record](docs/submission/HOSTING.md). The inherited pilot source and Git history are retained for provenance; this deployment uses only the isolated `discovery` schema and a dedicated restricted database login.
+
+## Hackathon discovery edition — 25 October 2026
+
+The new Qloo discovery workflow is at **[/discover](http://localhost:3500/discover)**. It is separate from the pilot described below. This independent checkout is prepared for the new `sila-discovery` repository and Vercel project. Publication and deployment results are recorded in `docs/submission/HOSTING.md`.
+
+With Node.js 22.19+ and Docker running:
+
+```bash
+npm ci
+# Set QLOO_API_KEY in ignored .env.local. Never put it in a NEXT_PUBLIC variable.
+npm run discovery
+```
+
+The command prepares its own PostgreSQL container and persistent volume on loopback port 57432, generates local credentials in ignored `.discovery-local.json`, and starts the app on port 3500. It never connects to the pilot database. Open `/discover`, select an actual Qloo search result, and find a fictional session for seven places under £35. Try Spirited Away (movie), then Miles Davis (artist), to compare live venue orders.
+
+Search and ranking use real Qloo calls. Sessions and requests are fictional; no seats, messages, venue approvals or payments are created in the pilot. Signed visitor cookies and PostgreSQL row-level ownership protect persisted discovery records. Claude tool calling is optional and implemented with the official SDK; no live Anthropic run has been verified because its key is not configured.
+
+- [Submission readiness and remaining external steps](docs/submission/READINESS.md)
+- [Judge walkthrough and setup](docs/submission/JUDGE_GUIDE.md)
+- [Devpost description draft](docs/submission/DEVPOST.md)
+- [Real Qloo traces](docs/submission/evidence/live-traces.json)
+- [MIT software licence](LICENSE) and [third-party credits](THIRD_PARTY_NOTICES.md)
+
+After building, `npm run discovery:start` runs the production server locally. `npm run discovery:verify` exercises real Qloo and the isolated database, including concurrent retries and ownership checks. Stop the app with Ctrl+C; `docker stop sila-discovery-local` stops its database without deleting records. Existing pilot and customer-demo commands below remain separate.
 
 Sila helps smaller Edinburgh cultural clubs book experiences they are too small to arrange alone. A venue publishes a dated session with a fixed price and minimum; clubs commit conditionally for exact places, possibly weeks apart; once the minimum is reached each club pays its deposit directly to the venue, and the venue verifies receipts and confirms. At most two clubs per session in the pilot.
 

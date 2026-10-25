@@ -1251,7 +1251,13 @@ Official sources support the technical, privacy and contract requirements. Pilot
 
 # Repository status
 
-*Not part of the guide. Updated 19 October 2026. No live pilot is released. Local demo and rehearsal records are synthetic; no actual payment or venue approval is represented.*
+*Not part of the guide. Updated 25 October 2026. No live pilot is released. Local demo and rehearsal records are synthetic; no actual payment or venue approval is represented.*
+
+## Local hackathon discovery edition — 25 October 2026
+
+The owner requested submission preparation for the Qloo hackathon and explicitly required local changes only. A separate `/discover` module now implements genuine Qloo interest search and place ranking, deterministic fictional-session eligibility, transparent result traces and private conditional sample requests. Five Edinburgh venue IDs were verified by name/address; two actual profiles returned different orders among four venues. A dedicated local PostgreSQL database on loopback port 57432 stores runs and requests under signed anonymous visitor ownership and RLS. It has no pilot credentials, session-write grants, payment path or notification delivery. Conditional requests reserve no places. An optional bounded Claude tool loop is implemented and mocked-tested; no live model run is verified without an Anthropic key.
+
+This is an isolated hackathon experiment, not a change to the guide's live product policies (§07, §15–18, §22, §24, §27). Manual club introductions, venue approval, the two-club pilot limit and confirmation rules remain authoritative. No commit, push, deployment or final submission was made. See `docs/submission/READINESS.md` for real evidence, checks and remaining external steps; DEC33 and RISK18 record the scope boundary. The hosted product interface described below predates this local discovery edition.
 
 ## Deployed today
 

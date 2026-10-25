@@ -25,6 +25,8 @@ qloo-dumps/
 # tooling
 .vercel/
 .supabase/
+.discovery-local.json
+submission-local/
 __pycache__/
 *.pyc
 .DS_Store
@@ -42,3 +44,5 @@ playwright-report/
 Design/
 Sila prototype launch/
 Sila prototype launch.zip
+
+.vercel

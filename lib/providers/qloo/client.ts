@@ -2,7 +2,7 @@ import type { RankedAnchor } from "@/lib/domain/utility";
 import { QLOO_DEFAULTS, type QlooConfig } from "./config";
 import { QlooError } from "./errors";
 import { parseInsights, parseSearch, type ParsedInsightEntity, type SearchCandidate } from "./parse";
-import { buildInsightsParams, buildSearchParams, queryFingerprint } from "./request";
+import { buildInsightsParams, buildPlaceInsightsParams, buildSearchParams, queryFingerprint } from "./request";
 
 /**
  * Shared per-job allowance: at most `maxCalls` HTTP attempts (including retries)
@@ -128,6 +128,11 @@ export class QlooClient {
       ranked: entities.map((e) => ({ entity_id: e.entity_id, raw_score: e.raw_score })),
       meta,
     };
+  }
+
+  async rankPlaces(interests: readonly string[], venueIds: readonly string[], budget: CallBudget) {
+    const { body, meta } = await this.get("/v2/insights", buildPlaceInsightsParams(interests, venueIds), budget);
+    return { entities: parseInsights(body), meta };
   }
 
   private async get(

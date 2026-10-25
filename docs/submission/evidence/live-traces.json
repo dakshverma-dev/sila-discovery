@@ -1,0 +1,137 @@
+{
+  "capturedAt": "2026-10-24T20:40:10.634Z",
+  "endpoint": "/v2/insights",
+  "scope": "Five verified venues; all sessions fictional",
+  "traces": [
+    {
+      "profile": "film",
+      "selectedInterests": [
+        {
+          "entityId": "9B33A620-68CA-49B3-BFCF-F09CCF8AD595",
+          "name": "Spirited Away",
+          "type": "urn:entity:movie"
+        }
+      ],
+      "sourceMode": "live",
+      "provider": {
+        "source_mode": "live",
+        "fetched_at": "2026-10-24T20:40:08.259Z",
+        "query_fingerprint": "369e0a30e764a296563d55c2d6485b7713a131c52215420b0035799f67762ef3"
+      },
+      "returnedVenueIds": [
+        "D2FF5BE6-CF16-4C6F-B6C6-BD203D7C8D0F",
+        "E47D2895-8282-40B4-86D4-73708B41388A",
+        "A2EA1EF0-4041-4784-825F-D3C7AAF96F00",
+        "36203B6D-C8CF-4784-9612-2D6A149325FA"
+      ],
+      "recommendations": [
+        {
+          "id": "garden-art",
+          "venueId": "garden",
+          "providerRank": 1,
+          "pricePence": 2200,
+          "remaining": 10
+        },
+        {
+          "id": "gallery-evening",
+          "venueId": "fruitmarket",
+          "providerRank": 2,
+          "pricePence": 2500,
+          "remaining": 9
+        },
+        {
+          "id": "museum-stories",
+          "venueId": "museum",
+          "providerRank": 4,
+          "pricePence": 1800,
+          "remaining": 8
+        }
+      ],
+      "exclusions": [
+        {
+          "sessionId": "photography",
+          "reasons": [
+            "Not enough sample places",
+            "Qloo returned no ranking for this venue"
+          ]
+        },
+        {
+          "sessionId": "print-room",
+          "reasons": [
+            "Above your per-person budget"
+          ]
+        }
+      ],
+      "callsUsed": 1,
+      "assistant": {
+        "status": "not_requested",
+        "detail": "Qloo discovery with deterministic eligibility checks. No language model used."
+      }
+    },
+    {
+      "profile": "jazz",
+      "selectedInterests": [
+        {
+          "entityId": "578CFC26-B696-449A-9655-3FB270DDA725",
+          "name": "Miles Davis",
+          "type": "urn:entity:artist"
+        }
+      ],
+      "sourceMode": "live",
+      "provider": {
+        "source_mode": "live",
+        "fetched_at": "2026-10-24T20:40:09.260Z",
+        "query_fingerprint": "0e29b5343b346bfaf1f9ad8bcbbbcebbf436dfc2af0945d55fb2a43aadbafa18"
+      },
+      "returnedVenueIds": [
+        "E47D2895-8282-40B4-86D4-73708B41388A",
+        "D2FF5BE6-CF16-4C6F-B6C6-BD203D7C8D0F",
+        "A2EA1EF0-4041-4784-825F-D3C7AAF96F00",
+        "36203B6D-C8CF-4784-9612-2D6A149325FA"
+      ],
+      "recommendations": [
+        {
+          "id": "gallery-evening",
+          "venueId": "fruitmarket",
+          "providerRank": 1,
+          "pricePence": 2500,
+          "remaining": 9
+        },
+        {
+          "id": "garden-art",
+          "venueId": "garden",
+          "providerRank": 2,
+          "pricePence": 2200,
+          "remaining": 10
+        },
+        {
+          "id": "museum-stories",
+          "venueId": "museum",
+          "providerRank": 4,
+          "pricePence": 1800,
+          "remaining": 8
+        }
+      ],
+      "exclusions": [
+        {
+          "sessionId": "photography",
+          "reasons": [
+            "Not enough sample places",
+            "Qloo returned no ranking for this venue"
+          ]
+        },
+        {
+          "sessionId": "print-room",
+          "reasons": [
+            "Above your per-person budget"
+          ]
+        }
+      ],
+      "callsUsed": 1,
+      "assistant": {
+        "status": "not_requested",
+        "detail": "Qloo discovery with deterministic eligibility checks. No language model used."
+      }
+    }
+  ]
+}

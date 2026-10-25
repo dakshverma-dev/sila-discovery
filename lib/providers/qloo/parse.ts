@@ -2,9 +2,11 @@ import { z } from "zod";
 import { QlooError } from "./errors";
 
 /**
- * Response parsers. Only `results.entities` for Insights is documented in D11;
- * the affinity field path and the /search envelope are PROVISIONAL until a
- * private live contract test pins them. Unknown fields are ignored.
+ * Response parsers. The /search array and place Insights results.entities /
+ * query.affinity paths were observed in live discovery checks on 25 October
+ * 2026 (docs/submission/evidence). Other legacy entity types are not covered
+ * by that check. Runtime validation remains authoritative; unknown fields
+ * are ignored and affinity is never presented as an individual probability.
  */
 
 const insightsEntity = z.looseObject({
@@ -24,7 +26,7 @@ export interface ParsedInsightEntity {
   subtype?: string;
   /** 1-based order as returned by the provider. */
   rank: number;
-  /** Provisional field path; audit only, never shown as a likelihood. */
+  /** Audit only; never shown as a likelihood. */
   raw_score?: number;
 }
 

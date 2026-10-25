@@ -1,5 +1,5 @@
-import { SilaApplication } from "@/components/sila/application/application";
+import { redirect } from "next/navigation";
 
 export default function HomePage() {
-  return <SilaApplication base="/sample" />;
+  redirect("/discover");
 }

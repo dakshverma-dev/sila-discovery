@@ -49,6 +49,13 @@ export function buildSearchParams(query: string, take = 5, types?: readonly stri
   return params;
 }
 
+/** Separate hackathon discovery; does not alter the pilot or legacy book ranking. */
+export function buildPlaceInsightsParams(interests: readonly string[], venues: readonly string[]): URLSearchParams {
+  const signals = uniqueValidIds(interests), candidates = uniqueValidIds(venues);
+  if (signals.length < 1 || signals.length > 3 || candidates.length < 1 || candidates.length > 50) throw invalid();
+  return new URLSearchParams({ "filter.type": "urn:entity:place", "signal.interests.entities": signals.join(","), "filter.results.entities": candidates.join(","), sort_by: "affinity", take: "50" });
+}
+
 /** Stable fingerprint of a canonical query, used for caching and provenance. */
 export function queryFingerprint(path: string, params: URLSearchParams, scope = ""): string {
   const canonical = [...params.entries()]

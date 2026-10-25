@@ -1,0 +1,8 @@
+{
+  "checkedAt": "2026-10-24T20:40:10.638Z",
+  "mode": "local HTTP, real Qloo, dedicated PostgreSQL",
+  "assertions": 25,
+  "result": "passed",
+  "mockedAssistant": false,
+  "anthropicLiveVerified": false
+}
